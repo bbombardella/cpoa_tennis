@@ -12,6 +12,18 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <!-- Bienvenue -->
+            <div class="flex items-center justify-center mt-4">
+                <p class="text-gray-900 hover:text-gray-900">
+                    {{ __('Bienvenue sur TTP') }}
+                </p>
+            </div>
+            <div class="flex items-center justify-center mt-4">
+                <p class="text-sm text-gray-900 hover:text-gray-900">
+                    {{ __('Veuillez vous inscrire') }}
+                </p>
+            </div>
+            
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Nom')" />
