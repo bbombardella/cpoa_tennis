@@ -22,7 +22,7 @@ class Tournois extends Model
     public function statut(){
         return $this->hasOne(Statut::class, 'idStatut');
     }
-
+    protected $table = 'tournois';
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keytype = 'int';
