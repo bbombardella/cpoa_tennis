@@ -20,10 +20,10 @@ class ResultatMatch extends Model
     ];
 
     public function gagnant() {
-        return $this->hasOne(Joueur::class);
+        return $this->hasOne(Joueur::class, 'gagnant');
     }
 
     public function perdant() {
-        return $this->hasOne(Joueur::class);
+        return $this->hasOne(Joueur::class, 'perdant');
     }
 }

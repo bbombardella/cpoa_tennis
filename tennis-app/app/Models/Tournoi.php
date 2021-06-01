@@ -12,7 +12,7 @@ class Tournois extends Model
     protected $fillable = [
         'lieu',
         'date',
-        'statut',
+        'idStatut',
     ];
 
     protected $casts = [
@@ -20,7 +20,7 @@ class Tournois extends Model
     ];
 
     public function statut(){
-        return $this->hasOne(Statut::class);
+        return $this->hasOne(Statut::class, 'idStatut');
     }
 
     protected $primaryKey = 'id';
