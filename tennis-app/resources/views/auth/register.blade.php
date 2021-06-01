@@ -42,9 +42,9 @@
                 <x-label for="roles" :value="__('Rôles')" />
                 <div class="relative inline-block w-full text-gray-700">
                     <select class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Regular input">
-                      <option>A regular sized select input</option>
-                      <option>Another option</option>
-                      <option>And one more</option>
+                        @foreach ($roles as $role)
+                            <option>{{$role->name}}</option>
+                        @endforeach
                     </select>
                     
                 </div>
