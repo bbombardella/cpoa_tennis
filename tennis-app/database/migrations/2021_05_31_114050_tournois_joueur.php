@@ -13,9 +13,10 @@ class TournoisJoueur extends Migration
      */
     public function up()
     {
-        Schema::create('tournoisjoueur', function (Blueprint $table) {
+        Schema::create('tournois_joueur', function (Blueprint $table) {
             $table->unsignedBigInteger('idJoueur');
             $table->unsignedBigInteger('idTournois');
+            $table->primary(['idTournois', 'idJoueur']);
             $table->foreign('idTournois')->references('id')->on('tournois');
             $table->foreign('idJoueur')->references('id')->on('joueur');
         });
