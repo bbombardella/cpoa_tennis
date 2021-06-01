@@ -12,6 +12,18 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
+            <!-- Bienvenue -->
+            <div class="flex items-center justify-center mt-4">
+                <p class="text-gray-900 hover:text-gray-900">
+                    {{ __('Bienvenue sur TTP') }}
+                </p>
+            </div>
+            <div class="flex items-center justify-center mt-4">
+                <p class="text-sm text-gray-900 hover:text-gray-900">
+                    {{ __('Veuillez vous inscrire') }}
+                </p>
+            </div>
+            
             <!-- Name -->
             <div>
                 <x-label for="name" :value="__('Nom')" />
@@ -24,6 +36,18 @@
                 <x-label for="email" :value="__('Email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="roles" :value="__('Rôles')" />
+                <div class="relative inline-block w-full text-gray-700">
+                    <select class="w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" placeholder="Regular input">
+                        @foreach ($roles as $role)
+                            <option>{{$role->name}}</option>
+                        @endforeach
+                    </select>
+                    
+                </div>
             </div>
 
             <!-- Password -->
