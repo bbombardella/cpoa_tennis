@@ -54,6 +54,13 @@
                     {{ __('S\'inscrire') }}
                 </x-button>
             </div>
+            
+            {{--Ici pour l'instant le lien renvoie à la connexion, il faudra juste changer la route quand elle aura été créée--}}
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                    {{ __('Continuer sans s\'inscrire') }}
+                </a>
+            </div>
         </form>
     </x-auth-card>
 </x-guest-layout>
