@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/joueurs', function () {
+    return view('joueurs');
+})->middleware(['auth'])->name('joueurs');
 
 Route::get('/tournois', function () {
     return view('tournois');
