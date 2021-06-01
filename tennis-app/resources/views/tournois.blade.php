@@ -17,18 +17,18 @@
                         <?php
 
                         $tournois = DB::table('tournois')->get();
-                        echo '<ul>';
+                        
                         foreach ($tournois as $tournoi){
-                            echo '<li>';
-                            echo '<p>';
-                            echo 'Numéro de tournoi : ' .$tournoi->id;
-                            echo '</p>';
-                            echo '<p>';
-                            echo 'Le tournoi se déroule à '.$tournoi->lieu. ' le ' .$tournoi->date;
-                            echo '</p>';
-                            echo '</li>';
+                            echo ' <div>
+                                        <p>
+                                            Numéro de tournoi : ' .$tournoi->id.'
+                                        </p>
+                                        <p>
+                                            Le tournoi se déroule à '.$tournoi->lieu. ' le ' .$tournoi->date.'
+                                        </p>
+                                    </div>';
                         }
-                        echo '</ul>';
+                        
                         ?>
                     </div>
                 </div>
