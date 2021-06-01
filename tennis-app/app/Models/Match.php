@@ -20,10 +20,10 @@ class Match extends Model
     protected $primaryKey = 'id';
 
     public function statut(){
-        return $this->hasOne(Statut::class);
+        return $this->hasOne(Statut::class, 'idStatut');
     }
 
     public function tournois(){
-        return $this->hasOne(Tournois::class);
+        return $this->hasOne(Tournois::class, 'idTournois');
     }
 }
