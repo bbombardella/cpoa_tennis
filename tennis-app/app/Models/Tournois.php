@@ -27,6 +27,9 @@ class Tournois extends Model
     public $incrementing = true;
     protected $keytype = 'int';
 
-
+    public function joueur()
+    {
+        return $this->belongsToMany(Joueur::class, 'tournois_joueur', 'idTournois', 'idJoueur');
+    }
     
 }

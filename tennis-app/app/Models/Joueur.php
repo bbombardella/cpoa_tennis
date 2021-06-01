@@ -19,4 +19,9 @@ class Joueur extends Model
         'niveau',
         'club',
     ];
+
+    public function tournois()
+    {
+        return $this->belongsToMany(Tournois::class, 'tournois_joueur', 'idJoueur', 'idTournois');
+    }
 }
