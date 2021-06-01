@@ -25,4 +25,8 @@ Route::get('/tournois', function () {
     return view('tournois');
 })->middleware(['auth'])->name('tournois');
 
+Route::get('/recherche', function () {
+    return view('recherche');
+})->middleware(['auth'])->name('recherche');
+
 require __DIR__.'/auth.php';

@@ -16,10 +16,17 @@
                         {{ __('Joueurs') }}
                     </x-nav-link>
                 </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('tournois')" :active="request()->routeIs('tournois')">
                         {{ __('Tournois') }}
                     </x-nav-link>
+
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('recherche')" :active="request()->routeIs('recherche')">
+                        {{ __('Recherche') }}
+                    </x-nav-link>
+                </div>
                 </div>
             </div>
 
