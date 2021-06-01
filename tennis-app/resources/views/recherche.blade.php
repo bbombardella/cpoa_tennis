@@ -11,8 +11,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <form action>
-                        <input type='text' name='search'>
-                        <button type='submit' class='btn btn-info'><i class="fa fa-search" aria-hidden="true"></i></button>
+                        <input type='text' name='search' placeholder='Rechercher...'>
+                        <button type='submit' class='btn btn-info'>
+                            Rechercher
+                        </button>
                     </form>
                 </div>
             </div>
