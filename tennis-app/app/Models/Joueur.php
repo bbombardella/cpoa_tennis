@@ -9,6 +9,8 @@ class Joueur extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
     protected $table = 'joueur';
 
     protected $primaryKey = 'id';

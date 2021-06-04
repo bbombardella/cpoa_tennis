@@ -15,7 +15,7 @@ class JoueurController extends Controller
     /**
      * Store a new flight in the database.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\Request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
