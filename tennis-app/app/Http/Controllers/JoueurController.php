@@ -9,7 +9,7 @@ class JoueurController extends Controller
 {
     public function create()
     {
-        return view('joueurs');
+        return;
     } 
     
     /**

@@ -34,7 +34,9 @@ Route::get('/modal', function () {
     return view('modal_joueur');
 })->middleware(['auth'])->name('modal');
 
-Route::post('/joueurs/create', [JoueurController::class, 'store'])
-->middleware('auth')->name('joueurs');
+Route::post('/joueurs', [JoueurController::class, 'store'],function(){
+    return view('joueurs');
+})
+->middleware('auth')->name('joueurs/create');
 
 require __DIR__.'/auth.php';
