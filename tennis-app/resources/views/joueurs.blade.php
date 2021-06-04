@@ -6,7 +6,6 @@
             {{ __('Joueurs') }}
         </h2>
     </x-slot>
-    
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -33,9 +32,11 @@
                     </div>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <x-button name="createJoueur" class="createJoueur" type="button">
-                        Créer un joueur
-                    </x-button> 
+                    <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/modal') }}">
+                        <x-button name="createJoueur" class="createJoueur" type="button">
+                            Créer un joueur
+                        </x-button> 
+                    </a>  
                 </div>
             </div>
         </div>

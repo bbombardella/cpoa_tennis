@@ -29,4 +29,8 @@ Route::get('/recherche', function () {
     return view('recherche');
 })->middleware(['auth'])->name('recherche');
 
+Route::get('/modal', function () {
+    return view('modal');
+})->middleware(['auth'])->name('joueurs2');
+
 require __DIR__.'/auth.php';
