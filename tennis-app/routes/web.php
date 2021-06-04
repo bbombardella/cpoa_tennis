@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JoueurController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,10 @@ Route::get('/recherche', function () {
 })->middleware(['auth'])->name('recherche');
 
 Route::get('/modal', function () {
-    return view('modal');
-})->middleware(['auth'])->name('joueurs2');
+    return view('modal_joueur');
+})->middleware(['auth'])->name('modal');
+
+Route::post('/joueurs/create', [JoueurController::class, 'store'])
+->middleware('auth')->name('joueurs');
 
 require __DIR__.'/auth.php';

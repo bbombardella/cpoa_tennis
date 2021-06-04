@@ -87,47 +87,46 @@
           </div>
         </div>
       </div>
-      <form method="POST" action="{{ route('joueurs') }}">
+      <form method="POST" action="{{ url('/joueurs/create') }}">
 
-      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
             <div>
-                <x-label for="Nom" :value="__('Nom')" />
+                <x-label for="nom" :value="__('Nom')" />
 
-                <x-input id="Nom" class="block mt-1 mr-3" type="text" name="Nom_joueur" :value="old('Nom')" required autofocus />
+                <x-input id="nom" class="block mt-1 mr-3" type="text" name="nom" :value="old('nom')" required autofocus />
             </div>
 
             <div>
-                <x-label for="Prénom" :value="__('Prénom')" />
+                <x-label for="prenom" :value="__('Prénom')" />
 
-                <x-input id="Prénom" class="block mt-1 mr-3" type="text" name="Prénom_joueur" :value="old('Prénom')" required autofocus />
-            </div>
-        </div>
-
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-            <div>
-                <x-label for="Niveau" :value="__('Niveau')" />
-
-                <x-input id="Niveau" class="block mt-1 mr-3" type="text" name="Niveau_joueur" :value="old('Niveau')" required autofocus />
-            </div>
-
-            <div>
-                <x-label for="Club" :value="__('Club')" />
-
-                <x-input id="Club" class="block mt-1 mr-3" type="text" name="Club_joueur" :value="old('Club')" required autofocus />
+                <x-input id="prenom" class="block mt-1 mr-3" type="text" name="prenom" :value="old('prenom')" required autofocus />
             </div>
         </div>
 
-        </form>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
+            <div>
+                <x-label for="niveau" :value="__('Niveau')" />
+
+                <x-input id="niveau" class="block mt-1 mr-3" type="text" name="niveau" :value="old('niveau')" required autofocus />
+            </div>
+
+            <div>
+                <x-label for="club" :value="__('Club')" />
+
+                <x-input id="club" class="block mt-1 mr-3" type="text" name="club" :value="old('club')" required autofocus />
+            </div>
+        </div>
+
+        
       <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button type="button" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
-          Ajouter
-        </button>
+      <input type="submit" name="validation" value="Ajouter" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
         <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
         <a href="{{ url('/joueurs') }}">
           Annuler
         </a>
         </button>
       </div>
+      </form>
     </div>
   </div>
 </div>
