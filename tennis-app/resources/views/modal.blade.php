@@ -93,13 +93,13 @@
             <div>
                 <x-label for="Nom" :value="__('Nom')" />
 
-                <x-input id="Nom" class="block mt-1" type="text" name="Nom_joueur" :value="old('Nom')" required autofocus />
+                <x-input id="Nom" class="block mt-1 mr-3" type="text" name="Nom_joueur" :value="old('Nom')" required autofocus />
             </div>
 
             <div>
                 <x-label for="Prénom" :value="__('Prénom')" />
 
-                <x-input id="Prénom" class="block mt-1" type="text" name="Prénom_joueur" :value="old('Prénom')" required autofocus />
+                <x-input id="Prénom" class="block mt-1 mr-3" type="text" name="Prénom_joueur" :value="old('Prénom')" required autofocus />
             </div>
         </div>
 
@@ -107,13 +107,13 @@
             <div>
                 <x-label for="Niveau" :value="__('Niveau')" />
 
-                <x-input id="Niveau" class="block mt-1" type="text" name="Niveau_joueur" :value="old('Niveau')" required autofocus />
+                <x-input id="Niveau" class="block mt-1 mr-3" type="text" name="Niveau_joueur" :value="old('Niveau')" required autofocus />
             </div>
 
             <div>
                 <x-label for="Club" :value="__('Club')" />
 
-                <x-input id="Club" class="block mt-1" type="text" name="Club_joueur" :value="old('Club')" required autofocus />
+                <x-input id="Club" class="block mt-1 mr-3" type="text" name="Club_joueur" :value="old('Club')" required autofocus />
             </div>
         </div>
 
