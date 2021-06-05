@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JoueurController;
+use App\Models\Joueur;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/joueurs', function () {
-    return view('joueurs');
-})->middleware(['auth'])->name('joueurs');
+Route::get('/joueurs', [JoueurController::class, 'index'])->middleware(['auth'])->name('joueurs');
 
 Route::get('/tournois', function () {
     return view('tournois');
@@ -30,13 +29,12 @@ Route::get('/recherche', function () {
     return view('recherche');
 })->middleware(['auth'])->name('recherche');
 
-Route::get('/modal', function () {
-    return view('modal_joueur');
+Route::get('/joueurs/create', function () {
+    $joueurs = Joueur::all();
+    return view('modal_joueur')->with('joueurs', $joueurs);
 })->middleware(['auth'])->name('modal');
 
-Route::post('/joueurs', [JoueurController::class, 'store'],function(){
-    return view('joueurs');
-})
+Route::post('/joueurs/create', [JoueurController::class, 'store'])
 ->middleware('auth')->name('joueurs/create');
 
 require __DIR__.'/auth.php';

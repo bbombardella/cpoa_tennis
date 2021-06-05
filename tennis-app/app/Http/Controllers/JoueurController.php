@@ -7,11 +7,17 @@ use App\Models\Joueur;
 
 class JoueurController extends Controller
 {
-    public function create()
+    /**
+     * Show all the Joueur in the database.
+     */
+    public function index()
     {
-        return;
-    } 
-    
+        $joueurs = Joueur::all();
+
+        return view('joueurs')->with('joueurs', $joueurs);
+
+    }
+
     /**
      * Store a new flight in the database.
      *
@@ -35,6 +41,8 @@ class JoueurController extends Controller
         ]);
 
         $joueur->save();
+
+        return redirect()->route('joueurs')->with('successMsg', 'Joueur ajouté avec succès !');
 
     }       
 }

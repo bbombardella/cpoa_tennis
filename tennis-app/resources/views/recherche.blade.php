@@ -15,6 +15,7 @@
                         <button type='submit' class='btn btn-info'>
                             Rechercher
                         </button>
+                        <i class="fas fa-search"></i>
                     </form>
                 </div>
             </div>
