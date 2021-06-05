@@ -14,8 +14,17 @@ class JoueurController extends Controller
     {
         $joueurs = Joueur::all();
 
-        return view('joueurs')->with('joueurs', $joueurs);
+        return view('joueurs/list')->with('joueurs', $joueurs);
 
+    }
+
+    public function show($id) {
+        $joueur = Joueur::find($id);
+        if($joueur) {
+            return view('joueurs/show')->with('joueur', $joueur);
+        } else {
+            abort(404, 'Joueur non trouvé !');
+        }
     }
 
     /**

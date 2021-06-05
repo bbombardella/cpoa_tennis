@@ -21,6 +21,16 @@ Route::get('/', function () {
 
 Route::get('/joueurs', [JoueurController::class, 'index'])->middleware(['auth'])->name('joueurs');
 
+Route::get('joueurs/{id}', [JoueurController::class, 'show']);
+
+Route::get('/joueurs/create', function () {
+    $joueurs = Joueur::all();
+    return view('joueurs/modal')->with('joueurs', $joueurs);
+})->middleware(['auth'])->name('modal');
+
+Route::post('/joueurs/create', [JoueurController::class, 'store'])
+->middleware('auth')->name('joueurs/create');
+
 Route::get('/tournois', function () {
     return view('tournois');
 })->middleware(['auth'])->name('tournois');
@@ -28,13 +38,5 @@ Route::get('/tournois', function () {
 Route::get('/recherche', function () {
     return view('recherche');
 })->middleware(['auth'])->name('recherche');
-
-Route::get('/joueurs/create', function () {
-    $joueurs = Joueur::all();
-    return view('modal_joueur')->with('joueurs', $joueurs);
-})->middleware(['auth'])->name('modal');
-
-Route::post('/joueurs/create', [JoueurController::class, 'store'])
-->middleware('auth')->name('joueurs/create');
 
 require __DIR__.'/auth.php';

@@ -1,4 +1,4 @@
-@include('joueurs')
+@include('joueurs/list')
 
 <!-- Modal Structure -->
 <!-- This example requires Tailwind CSS v2.0+ -->
