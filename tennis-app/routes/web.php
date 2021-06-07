@@ -5,6 +5,8 @@ use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\TournoisController;
 use App\Models\Joueur;
 use App\Models\Tournois;
+use App\Http\Controllers\RechercheController;
+use App\Models\Joueur;
 use App\Http\Controllers\TourController;
 
 /*
@@ -53,7 +55,10 @@ Route::get('/tournois', function () {
 })->middleware(['auth'])->name('tournois');
 
 Route::get('/recherche', function () {
-    return view('recherche');
+    return view('recherche/recherche');
 })->middleware(['auth'])->name('recherche');
+
+Route::post('/recherche', [RechercheController::class, 'search'])
+->middleware(['auth'])->name('recherche');
 
 require __DIR__.'/auth.php';

@@ -10,14 +10,23 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <form action>
-                        <input type='text' name='search' placeholder='Rechercher...'>
+                    <form method="POST" action="{{ url('recherche') }}">
+                        <input type='text' name='item_search' placeholder='Rechercher...'>
+
+                        <select name="search" class="form-control">
+                            <option>Joueurs</option>
+                            <option>Tournois</option> 
+                        </select>
+
                         <button type='submit' class='btn btn-info'>
                             Rechercher
                         </button>
                         <i class="fas fa-search"></i>
                     </form>
                 </div>
+                @isset($joueurs)
+                    @include('recherche/joueurs')
+                @endisset
             </div>
         </div>
     </div>
