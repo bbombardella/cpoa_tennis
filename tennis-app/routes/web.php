@@ -32,12 +32,13 @@ Route::get('/joueurs/{id}', [JoueurController::class, 'show']);
 
     //-- Route Tournois
 Route::get('/tournois', [TournoisController::class, 'index'])->middleware(['auth'])->name('tournois');
-
 Route::get('/tournois/create', [TournoisController::class, 'create'])->middleware(['auth'])->name('tournois/create');
-
 Route::post('/tournois/create', [TournoisController::class, 'store'])
 ->middleware('auth')->name('tournois/create');
-
+Route::get('/tournois/{id_tournois}/joueurs', [TournoisController::class, 'list']);
+Route::get('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'createPlayer'])
+->name('tournois/associate');
+Route::post('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'storeplayer']);
 Route::get('/tournois/{id}', [TournoisController::class, 'show']);
 
 

@@ -38,7 +38,7 @@
             </h3>
             <div class="mt-2">
               <p class="text-sm text-gray-500">
-                Veuillez entrer les données du tournoi
+                Veuillez selectionner les participants
               </p>
             </div>
           </div>
