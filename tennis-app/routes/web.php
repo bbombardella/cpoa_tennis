@@ -3,10 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\TournoisController;
-use App\Models\Joueur;
-use App\Models\Tournois;
 use App\Http\Controllers\RechercheController;
 use App\Http\Controllers\TourController;
+use App\Models\Joueur;
+use App\Models\Tournois;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,9 +49,10 @@ Route::get('/tournois/{id_tournois}/tour/{id_tour}', [TourController::class, 'sh
 Route::get('/tournois/{id_tournois}/tour/create', [TourController::class, 'create']);
 Route::post('/tournois/{id_tournois}/tour/create', [TourController::class, 'store']);
 
-Route::get('/tournois', function () {
-    return view('tournois');
-})->middleware(['auth'])->name('tournois');
+Route::get('/tour/{id_tour}/match', [MatchController::class, 'index']);
+Route::get('/tour/{id_tour}/match/{id_match}', [MatchController::class, 'show']);
+Route::get('/tour/{id_tour}/match/create', [MatchController::class, 'create']);
+Route::post('/tour/{id_tour}/match/create', [MatchController::class, 'store']);
 
 Route::get('/recherche', function () {
     return view('recherche/recherche');

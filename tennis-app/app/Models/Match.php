@@ -12,9 +12,7 @@ class Match extends Model
     use Statut;
 
     protected $table = 'match';
-
     protected $primaryKey = 'id';
-
     protected $fillable = [
             'numeroDeMatch'
         ];
