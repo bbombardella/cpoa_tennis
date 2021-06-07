@@ -33,10 +33,7 @@ Route::get('/joueurs/{id}', [JoueurController::class, 'show']);
     //-- Route Tournois
 Route::get('/tournois', [TournoisController::class, 'index'])->middleware(['auth'])->name('tournois');
 
-Route::get('/tournois/create', function() {
-    $tournois= Tournois::all();
-    return view('tournois/modal')->with('tournois', $tournois);
-})->middleware(['auth'])->name('tournois/create');
+Route::get('/tournois/create', [TournoisController::class, 'create'])->middleware(['auth'])->name('tournois/create');
 
 Route::post('/tournois/create', [TournoisController::class, 'store'])
 ->middleware('auth')->name('tournois/create');

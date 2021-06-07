@@ -25,7 +25,7 @@
                     </h3>
                     <div>
                         <ul>
-                            @foreach ($tournois as $tournoi)
+                            @foreach ($data['tournois'] as $tournoi)
                                 <li>
                                     <p>
                                         <a class="underline" href="{{ url('/tournois/'.$tournoi->id) }}">{{ $tournoi->id }} {{ $tournoi->lieu }} {{ $tournoi->date }}</a>
