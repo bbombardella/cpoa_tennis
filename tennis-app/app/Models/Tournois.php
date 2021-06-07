@@ -12,7 +12,7 @@ class Tournois extends Model
     protected $fillable = [
         'lieu',
         'date',
-        'idStatut',
+        'idStatut'
     ];
 
     protected $casts = [
@@ -26,6 +26,7 @@ class Tournois extends Model
     protected $primaryKey = 'id';
     public $incrementing = true;
     protected $keytype = 'int';
+    public $timestamps = false;
 
     public function joueur()
     {

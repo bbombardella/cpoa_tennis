@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JoueurController;
+use App\Http\Controllers\TournoisController;
+use App\Models\Joueur;
+use App\Models\Tournois;
 use App\Http\Controllers\RechercheController;
 use App\Models\Joueur;
 use App\Http\Controllers\TourController;
@@ -26,6 +29,21 @@ Route::get('/joueurs/create', [JoueurController::class, 'create'])->middleware([
 Route::post('/joueurs/create', [JoueurController::class, 'store'])
 ->middleware('auth')->name('joueurs/create');
 Route::get('/joueurs/{id}', [JoueurController::class, 'show']);
+
+
+    //-- Route Tournois
+Route::get('/tournois', [TournoisController::class, 'index'])->middleware(['auth'])->name('tournois');
+
+Route::get('/tournois/create', function() {
+    $tournois= Tournois::all();
+    return view('tournois/modal')->with('tournois', $tournois);
+})->middleware(['auth'])->name('tournois/create');
+
+Route::post('/tournois/create', [TournoisController::class, 'store'])
+->middleware('auth')->name('tournois/create');
+
+Route::get('/tournois/{id}', [TournoisController::class, 'show']);
+
 
 Route::get('/tournois/{id_tournois}/tour', [TourController::class, 'index']);
 Route::get('/tournois/{id_tournois}/tour/{id_tour}', [TourController::class, 'show']);
