@@ -16,12 +16,12 @@ class StatutSeeder extends Seeder
     {
         Statut::create([
             'nom' => 'En cours'
-        ]);
+        ])->save();
         Statut::create([
             'nom' => 'En attente'
-        ]);
+        ])->save();
         Statut::create([
             'nom' => 'Terminé'
-        ]);
+        ])->save();
     }
 }
