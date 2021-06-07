@@ -29,7 +29,7 @@
                             Liste complète
                         </h4>
                         <ul>
-                            @foreach ($joueurs as $joueur)
+                            @foreach ($data['joueurs'] as $joueur)
                                 <li>
                                     <p>
                                         <a class="underline" href="{{ url('/joueurs/'.$joueur->id) }}">{{ $joueur->nom }} {{ $joueur->prenom }}</a>
