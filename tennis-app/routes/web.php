@@ -26,19 +26,14 @@ Route::get('/', function () {
 
 Route::get('/joueurs', [JoueurController::class, 'index'])->middleware(['auth'])->name('joueurs');
 Route::get('/joueurs/create', [JoueurController::class, 'create'])->middleware(['auth'])->name('modal');
-Route::post('/joueurs/create', [JoueurController::class, 'store'])
-->middleware('auth')->name('joueurs/create');
+Route::post('/joueurs/create', [JoueurController::class, 'store'])->middleware('auth')->name('joueurs/create');
 Route::get('/joueurs/{id}', [JoueurController::class, 'show']);
 
 
     //-- Route Tournois
 Route::get('/tournois', [TournoisController::class, 'index'])->middleware(['auth'])->name('tournois');
-
 Route::get('/tournois/create', [TournoisController::class, 'create'])->middleware(['auth'])->name('tournois/create');
-
-Route::post('/tournois/create', [TournoisController::class, 'store'])
-->middleware('auth')->name('tournois/create');
-
+Route::post('/tournois/create', [TournoisController::class, 'store'])->middleware('auth')->name('tournois/create');
 Route::get('/tournois/{id}', [TournoisController::class, 'show']);
 
 
