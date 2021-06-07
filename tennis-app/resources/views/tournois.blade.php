@@ -21,7 +21,7 @@
                         foreach ($tournois as $tournoi){
                             echo ' <div>
                                         <p>
-                                            Numéro de tournoi : ' .$tournoi->id.'
+                                            Numéro de tournois: ' .$tournoi->id.'
                                         </p>
                                         <p>
                                             Le tournoi se déroule à '.$tournoi->lieu. ' le ' .$tournoi->date.'
