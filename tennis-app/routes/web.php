@@ -34,6 +34,11 @@ Route::get('/tournois', function () {
     return view('tournois');
 })->middleware(['auth'])->name('tournois');
 
+Route::get('/tour/{id_tour}/match', [MatchController::class, 'index']);
+Route::get('/tour/{id_tour}/match/{id_match}', [MatchController::class, 'show']);
+Route::get('/tour/{id_tour}/match/create', [MatchController::class, 'create']);
+Route::post('/tour/{id_tour}/match/create', [MatchController::class, 'store']);
+
 Route::get('/recherche', function () {
     return view('recherche');
 })->middleware(['auth'])->name('recherche');
