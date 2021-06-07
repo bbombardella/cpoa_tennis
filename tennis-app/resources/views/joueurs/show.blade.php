@@ -38,6 +38,7 @@
                                 {{ $joueur->club }}
                             </li>
                         </ul>
+                        <a class="underline" href="{{ url('/joueurs/'.$joueur->id) }}">Ajouter aux favoris</a>
                     </div>
                 </div>
             </div>
