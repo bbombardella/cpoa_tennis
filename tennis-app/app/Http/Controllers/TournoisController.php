@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tournois;
+use App\Models\Statut;
 
 class TournoisController extends Controller
 {
@@ -14,7 +15,9 @@ class TournoisController extends Controller
     {
         $tournois = Tournois::all();
 
-        return view('tournois/list')->with('tournois', $tournois);
+        return view('tournois/list')->with('data', [
+            'tournois' => $tournois
+        ]);
 
     }
 
@@ -25,6 +28,15 @@ class TournoisController extends Controller
         } else {
             abort(404, 'tournoi non trouvé !');
         }
+    }
+
+    public function create() {
+        $tournois= Tournois::all();
+        $statuts = Statut::all();
+        return view('tournois/modal')->with('data', [
+            'tournois' => $tournois,
+            'statuts' => $statuts
+        ]);
     }
 
     /**
