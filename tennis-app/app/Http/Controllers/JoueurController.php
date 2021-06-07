@@ -27,6 +27,11 @@ class JoueurController extends Controller
         }
     }
 
+    public function create() {
+        $joueurs = Joueur::all();
+        return view('joueurs/modal')->with('joueurs', $joueurs);
+    }
+
     /**
      * Store a new flight in the database.
      *
