@@ -6,7 +6,6 @@ use App\Http\Controllers\TournoisController;
 use App\Models\Joueur;
 use App\Models\Tournois;
 use App\Http\Controllers\RechercheController;
-use App\Models\Joueur;
 use App\Http\Controllers\TourController;
 
 /*
