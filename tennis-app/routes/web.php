@@ -5,6 +5,7 @@ use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\TournoisController;
 use App\Http\Controllers\RechercheController;
 use App\Http\Controllers\TourController;
+use App\Http\Controllers\FavorisController;
 use App\Models\Joueur;
 use App\Models\Tournois;
 
@@ -28,6 +29,7 @@ Route::get('/joueurs/create', [JoueurController::class, 'create'])->middleware([
 Route::post('/joueurs/create', [JoueurController::class, 'store'])
 ->middleware('auth')->name('joueurs/create');
 Route::get('/joueurs/{id}', [JoueurController::class, 'show']);
+Route::post('/joueurs/{id}', [FavorisController::class, 'add'])->middleware('auth')->name('joueurs/favoris');
 
 
     //-- Route Tournois
