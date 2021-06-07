@@ -39,6 +39,7 @@
                             </li>
                         </ul>
                         @include('joueurs/ajout_favoris')
+                        @include('joueurs/Retirer_favoris')
                     </div>
                 </div>
             </div>

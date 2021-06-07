@@ -28,9 +28,9 @@ Route::get('/', function () {
 Route::get('/joueurs', [JoueurController::class, 'index'])->middleware(['auth'])->name('joueurs');
 Route::get('/joueurs/create', [JoueurController::class, 'create'])->middleware(['auth'])->name('modal');
 Route::post('/joueurs/create', [JoueurController::class, 'store'])->middleware('auth')->name('joueurs/create');
-Route::get('/joueurs/{id}', [JoueurController::class, 'show']);
-Route::post('/joueurs/{id}', [FavorisController::class, 'add'])->middleware('auth')->name('joueurs/favoris');
-
+Route::post('/joueurs/favoris/add/{id}', [FavorisController::class, 'add'])->middleware('auth')->name('joueurs/favoris');
+Route::post('/joueurs/favoris/remove/{id}',[FavorisController::class, 'remove'])->middleware('auth')->name('joueurs/favoris');
+Route::get('/joueurs/{id}', [JoueurController::class, 'show'])->middleware('auth')->name('joueurs/favoris');
 
     //-- Route Tournois
 Route::get('/tournois', [TournoisController::class, 'index'])->middleware(['auth'])->name('tournois');
