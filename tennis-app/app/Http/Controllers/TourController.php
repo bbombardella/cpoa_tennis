@@ -12,7 +12,7 @@ class TourController extends Controller
         if(!Tournois::find($id_tournois)) {
             abort(404);
         }
-        $tours = Tour::with('idTournois', $id_tournois)->get();
+        $tours = Tour::where('idTournois', $id_tournois)->get();
         return view('tour/list')->with('data', [
             'id_tournois' => $id_tournois,
             'tours' => $tours

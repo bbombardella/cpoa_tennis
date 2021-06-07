@@ -5,6 +5,7 @@ use App\Http\Controllers\JoueurController;
 use App\Http\Controllers\TournoisController;
 use App\Http\Controllers\RechercheController;
 use App\Http\Controllers\TourController;
+use App\Http\Controllers\MatchController;
 use App\Models\Joueur;
 use App\Models\Tournois;
 

@@ -9,7 +9,10 @@ class MatchController extends Controller
 {
     public function index($id_tour) {
         $matchs = Match::with('idTour', $id_tour)->get();
-        return $matchs;
+        return view('match/list')->with('data', [
+            'id_tour' => $id_tour,
+            'matchs' => $matchs
+        ]);
     }
 
     public function show($id_tour, $id_match) {
