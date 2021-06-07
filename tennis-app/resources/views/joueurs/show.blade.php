@@ -38,6 +38,7 @@
                                 {{ $joueur->club }}
                             </li>
                         </ul>
+                        @include('joueurs/ajout_favoris')
                     </div>
                 </div>
             </div>

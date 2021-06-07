@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
+    public function joueur()
+    {
+        return $this->belongsToMany(Joueur::class, 'favoris', 'idUser', 'idJoueur');
+    }
+
     /**
      * The attributes that are mass assignable.
      *

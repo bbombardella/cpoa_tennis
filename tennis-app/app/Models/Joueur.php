@@ -26,4 +26,9 @@ class Joueur extends Model
     {
         return $this->belongsToMany(Tournois::class, 'tournois_joueur', 'idJoueur', 'idTournois');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'favoris', 'idJoueur', 'idUser');
+    }
 }
