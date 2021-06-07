@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JoueurController;
+use App\Http\Controllers\RechercheController;
+use App\Models\Joueur;
 use App\Http\Controllers\TourController;
 
 /*
@@ -40,7 +42,10 @@ Route::get('/tour/{id_tour}/match/create', [MatchController::class, 'create']);
 Route::post('/tour/{id_tour}/match/create', [MatchController::class, 'store']);
 
 Route::get('/recherche', function () {
-    return view('recherche');
+    return view('recherche/recherche');
 })->middleware(['auth'])->name('recherche');
+
+Route::post('/recherche', [RechercheController::class, 'search'])
+->middleware(['auth'])->name('recherche');
 
 require __DIR__.'/auth.php';
