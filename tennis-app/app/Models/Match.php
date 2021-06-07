@@ -8,22 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Match extends Model
 {
     use HasFactory;
-    use Tournois;
+    use Tour;
     use Statut;
 
-    protected $fillable = [
-            'numeroDuTour',
-            'idStatut',
-            'idTournois'
-        ];
+    protected $table = 'match';
 
     protected $primaryKey = 'id';
+
+    protected $fillable = [
+            'numeroDeMatch'
+        ];
 
     public function statut(){
         return $this->hasOne(Statut::class, 'idStatut');
     }
 
-    public function tournois(){
-        return $this->hasOne(Tournois::class, 'idTournois');
+    public function tour(){
+        return $this->hasOne(Tour::class, 'idTournois');
     }
 }

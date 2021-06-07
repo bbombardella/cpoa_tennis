@@ -8,4 +8,18 @@ use Illuminate\Database\Eloquent\Model;
 class Tour extends Model
 {
     use HasFactory;
+
+    protected $table = 'tour';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'numeroDeTour'
+    ];
+
+    public function statut() {
+        return $this->hasOne(Statut::class, 'idStatut');
+    }
+
+    public function tournois() {
+        return $this->hasOne(Tournois::class, 'idTournois');
+    }
 }
