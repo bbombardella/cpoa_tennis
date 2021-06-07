@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Joueur;
+use Illuminate\Support\Facades\Auth;
 
 class JoueurController extends Controller
 {
@@ -13,8 +14,14 @@ class JoueurController extends Controller
     public function index()
     {
         $joueurs = Joueur::all();
-
-        return view('joueurs/list')->with('joueurs', $joueurs);
+        $user = Auth::user();
+        if($user) {
+            $favoris = $user->joueur;
+        }
+        return view('joueurs/list')->with('data', [
+            'joueurs' => $joueurs,
+            'favoris' => $favoris
+        ]);
 
     }
 
@@ -29,7 +36,14 @@ class JoueurController extends Controller
 
     public function create() {
         $joueurs = Joueur::all();
-        return view('joueurs/modal')->with('joueurs', $joueurs);
+        $user = Auth::user();
+        if($user) {
+            $favoris = $user->joueur;
+        }
+        return view('joueurs/modal')->with('data', [
+            'joueurs' => $joueurs,
+            'favoris' => $favoris
+        ]);
     }
 
     /**

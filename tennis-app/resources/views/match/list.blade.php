@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tournois') }}
+            {{ __('Tours') }}
         </h2>
     </x-slot>
 
@@ -21,25 +21,26 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h3 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
-                        Informations sur le tournoi {{ $tournoi->id }}
+                        Les matchs du tour {{ $data['id_tournois'] }}
                     </h3>
                     <div>
                         <ul>
-                            <li>
-                                {{ $tournoi->lieu }}
-                            </li>
-                            <li>
-                                {{ $tournoi->date }}
-                            </li>
-                            <li>
-                                {{ $tournoi->idStatut }}
-                            </li>
+                            @foreach ($data['tours'] as $tour)
+                                <li>
+                                    <p>
+                                        <a class="underline" href="{{ url('/joueurs/') }}"></a>
+                                    </p>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
-                    <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                    <a href="{{ url("/tournois/{$tournoi->id}/tour") }}">
-                      Voir les tours
-                    </a>
+                </div>
+                <div class="p-6 bg-white border-b border-gray-200">
+                    <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/joueurs/create') }}">
+                        <x-button name="createJoueur" class="createJoueur" type="button">
+                            Créer un tour
+                        </x-button> 
+                    </a>  
                 </div>
             </div>
         </div>

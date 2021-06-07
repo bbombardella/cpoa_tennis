@@ -3,10 +3,10 @@
         Vos favoris
     </h4>
     <ul>
-        @foreach ($joueurs as $joueur)
+        @foreach ($data['favoris'] as $favoris)
             <li>
                 <p>
-                    <a class="underline" href="{{ url('/joueurs/'.$joueur->id) }}">{{ $joueur->nom }} {{ $joueur->prenom }}</a>
+                    <a class="underline" href="{{ url('/joueurs/'.$favoris->id) }}">{{ $favoris->nom }} {{ $favoris->prenom }}</a>
                 </p>
             </li>
         @endforeach

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Tournois;
 use App\Models\Statut;
+use App\Models\Joueur;
 
 class TournoisController extends Controller
 {
@@ -39,6 +42,13 @@ class TournoisController extends Controller
         ]);
     }
 
+    public function createPlayer(){
+        $player = Joueurs::all();
+        return view('tournois/modalAddPlayer') ->with('data', [
+            'joueurs' => $player,
+        ]);
+    }
+
     /**
      * Store a new flight in the database.
      *
@@ -53,16 +63,15 @@ class TournoisController extends Controller
             'date' => 'required|Date',
             'etat' => 'required|int'
         ]);*/
-        
-        $tournois= Tournois::create([            
+        $tournois= ([            
             'lieu' => $request->lieu,
             'date' => $request->date,
             'idStatut' => $request->idStatut
         ]);
 
-        $tournois->save();
-
-        return redirect()->route('tournois')->with('successMsg', 'Tournoi créé avec succès !');
+        //$tournois->save();
+        $id = DB::table('Tournois')->insertGetId($tournois);
+        return redirect("/tournois/$id/joueurs/associate");//->with('successMsg', 'Tournoi créé avec succès !');
 
     }       
 }
