@@ -44,7 +44,9 @@
                             @include('joueurs/ajout_favoris')
                             
                         @endif
+                        @role('Organisateur')
                         @include('joueurs/modifier')
+                        @endrole
                     </div>
                 </div>
             </div>
