@@ -1,3 +1,5 @@
+@include('tournois/listPlayer')
+
 @if (session('successMsg'))
         <div class="m-3" role="alert">
             <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
@@ -7,7 +9,7 @@
             <p>{{ session('successMsg') }}</p>
             </div>
         </div>
-    @endif
+@endif
 
 <!-- Modal Structure -->
 <!-- This example requires Tailwind CSS v2.0+ -->
