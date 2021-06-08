@@ -47,10 +47,12 @@ class TournoisController extends Controller
         $tournois = Tournois::find($id_tournois);
         $player = Joueur::all();
         $statuts = Statut::all();
+        $joueur_tournoi = $tournois->joueur;
         return view('tournois/modalAddPlayer') ->with('data', [
             'tournois' => $tournois,
             'joueurs' => $player,
-            'statuts' => $statuts
+            'statuts' => $statuts,
+            'joueur_tournoi' => $joueur_tournoi,
         ]);
     }
 
@@ -61,8 +63,11 @@ class TournoisController extends Controller
 
         $tournoi = Tournois::find($id_tournois);
         foreach($request->joueur as $idPlayer) {
+            $player = Joueur::find($idPlayer);
+            if($tournoi->joueur->isEmpty()){
             $tournoi->joueur()->attach($idPlayer);
             $tournoi->save();
+            }
         }
         
        return redirect("/tournois/$id_tournois/joueurs")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
