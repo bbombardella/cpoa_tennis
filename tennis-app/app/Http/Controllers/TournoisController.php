@@ -70,17 +70,7 @@ class TournoisController extends Controller
             }
         }
         
-       return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueur.euse.s ajouté.e.s avec succès !');
-    }
-
-    public function removePlayer(Request $request, int $id_tournois){
-        $tournoi = Tournois::find($id_tournois);
-        foreach($request->joueur as $idPlayer) {
-            $tournoi->joueur()->detach($idPlayer);
-            $tournoi->save();
-        }
-
-        return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueur.euse.s retiré.e.s avec succès !');
+       return redirect("/tournois/$id_tournois/joueurs")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
     }
 
     public function listPlayer(int $id_tournois) {

@@ -27,6 +27,9 @@
                 @isset($joueurs)
                     @include('recherche/joueurs')
                 @endisset
+                @isset($tournois)
+                    @include('recherche/tournois')
+                @endisset
             </div>
         </div>
     </div>
