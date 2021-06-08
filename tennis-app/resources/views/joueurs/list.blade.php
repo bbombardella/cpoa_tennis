@@ -39,6 +39,7 @@
                         </ul>
                     </div>
                 </div>
+                @role('Organisateur')
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/joueurs/create') }}">
                         <x-button name="createJoueur" class="createJoueur" type="button">
@@ -46,6 +47,7 @@
                         </x-button> 
                     </a>  
                 </div>
+                @endrole
             </div>
         </div>
     </div>
