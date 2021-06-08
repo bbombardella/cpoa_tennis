@@ -86,6 +86,36 @@
         </a>
         </button>
       </div>
+
+
+
+        </div>
+      </form>
+      <form method="POST" action="{{ url('/tournois/'.$data['tournois']->id.'/joueurs/dissociate') }}">
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
+      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
+      <input type="submit" name="removePlayer" value="Retirer un joueur" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+            <div>
+                <x-label for="Joueur_tournoi" :value="__('joueur_tournoi')" />
+
+                <div class="col-sm-9">
+                    <select multiple="multiple" id="idPlayer" class="block mt-1 mr-3" type="string" name="joueur[]" required autofocus>
+
+                            @forelse ($data['joueur_tournoi'] as $joueur)
+                            @CRSFs
+                                <li>
+                                    <p>
+                                        <option value="{{$joueur->id}}"  >{{ $joueur->nom }} {{ $joueur->prenom }} </option>
+                                    </p>
+                                </li>
+                            @empty
+                            <p>Pas de joueurs pour ce tournoi</p>
+                            @endforelse
+                    </select>
+                </div>
+            </div>
+            <input type="submit" name="retirer joueur" value="Ajouter" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-blue-600 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm">
+        </div>
       </form>
     </div>
   </div>
