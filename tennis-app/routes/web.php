@@ -30,7 +30,10 @@ Route::get('/joueurs/create', [JoueurController::class, 'create'])->middleware([
 Route::post('/joueurs/create', [JoueurController::class, 'store'])->middleware('auth')->name('joueurs/create');
 Route::post('/joueurs/favoris/add/{id}', [FavorisController::class, 'add'])->middleware('auth')->name('joueurs/favoris');
 Route::post('/joueurs/favoris/remove/{id}',[FavorisController::class, 'remove'])->middleware('auth')->name('joueurs/favoris');
-Route::get('/joueurs/{id}', [JoueurController::class, 'show'])->middleware('auth')->name('joueurs/favoris');
+Route::get('/joueurs/{id}', [JoueurController::class, 'show'])->middleware('auth')->name('joueurs/id');
+Route::get('/joueurs/{id}/edit', [JoueurController::class, 'edit'])->middleware(['auth'])->name('modal/edit');
+Route::post('/joueurs/{id}/edit', [JoueurController::class, 'store_edit'])->middleware('auth')->name('joueurs/edit');
+
 
     //-- Route Tournois
 Route::get('/tournois', [TournoisController::class, 'index'])->middleware(['auth'])->name('tournois');
@@ -39,6 +42,7 @@ Route::post('/tournois/create', [TournoisController::class, 'store'])->middlewar
 Route::get('/tournois/{id_tournois}/joueurs', [TournoisController::class, 'listPlayer']);
 Route::get('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'createPlayer'])->name('tournois/associate');
 Route::post('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'storeplayer']);
+Route::post('/tournois/{id_tournois}/joueurs/dissociate', [TournoisController::class, 'removeplayer']);
 Route::get('/tournois/{id}', [TournoisController::class, 'show']);
 
 
