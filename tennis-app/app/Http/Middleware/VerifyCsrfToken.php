@@ -17,5 +17,6 @@ class VerifyCsrfToken extends Middleware
         'tournois/create',
         'recherche',
         'joueurs/*',
-    ];
+        '/tournois/*',
+        ];
 }

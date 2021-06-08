@@ -1,4 +1,13 @@
-@include('tournois/list')
+@if (session('successMsg'))
+        <div class="m-3" role="alert">
+            <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">
+            Succès !
+            </div>
+            <div class="border border-t-0 border-green-400 rounded-b bg-green-100 px-4 py-3 text-green-700">
+            <p>{{ session('successMsg') }}</p>
+            </div>
+        </div>
+    @endif
 
 <!-- Modal Structure -->
 <!-- This example requires Tailwind CSS v2.0+ -->
@@ -34,7 +43,7 @@
         <div class="sm:flex sm:items-start">
           <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
             <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-              Ajouter un tournoi
+              Ajouter des joueurs
             </h3>
             <div class="mt-2">
               <p class="text-sm text-gray-500">
@@ -44,31 +53,23 @@
           </div>
         </div>
       </div>
-      <form method="POST" action="{{ url('/tournois/create') }}">
+      <form method="POST" action="{{ url('/tournois/'.$data['tournois']->id.'/joueurs/associate') }}">
 
       <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
-            <div>
-                <x-label for="lieu" :value="__('lieu')" />
-
-                <x-input id="lieu" class="block mt-1 mr-3" type="test" name="lieu" :value="old('lieu')" required autofocus />
-            </div>
-
-            <div>
-                <x-label for="date" :value="__('date')" />
-
-                <x-input id="date" class="block mt-1 mr-3" type="date" name="date" :value="old('date')" required autofocus />
-            </div>
-        </div>
-
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
             <div>
-                <x-label for="idStatut" :value="__('idStatut')" />
+                <x-label for="Joueur" :value="__('Joueur')" />
 
                 <div class="col-sm-9">
-                    <select id="idStatut" class="block mt-1 mr-3" type="int" name="idStatut" :value="old('idStatut')" required autofocus>
-                        @foreach ($data['statuts'] as $statut)
-                            <option value="{{ $statut->id }}">{{ $statut->nom }}</option>
-                        @endforeach
+                    <select multiple="multiple" id="idPlayer" class="block mt-1 mr-3" type="string" name="joueur[]" required autofocus>
+                            @foreach ($data['joueurs'] as $joueur)
+                            @CRSFs
+                                <li>
+                                    <p>
+                                        <option value="{{$joueur->id}}">{{ $joueur->nom }} {{ $joueur->prenom }}</option>
+                                    </p>
+                                </li>
+                            @endforeach
                     </select>
                 </div>
 

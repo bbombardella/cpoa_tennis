@@ -42,8 +42,8 @@ class TournoisController extends Controller
         ]);
     }
 
-    public function createPlayer(){
-        $tournois = Tournois::all();
+    public function createPlayer(int $id_tournois){
+        $tournois = Tournois::find($id_tournois);
         $player = Joueur::all();
         $statuts = Statut::all();
         return view('tournois/modalAddPlayer') ->with('data', [
@@ -54,13 +54,17 @@ class TournoisController extends Controller
     }
 
     public function storePlayer(Request $request, int $id_tournois) {
-        $request->validate([
+        /*$request->validate([
             'idPlayer' => 'required|string|int'
-        ]);
+        ]);*/
 
         $tournoi = Tournois::find($id_tournois);
-        $tournoi->joueur()->attach($request->idPlayer);
-
+        foreach($request->joueur as $idPlayer) {
+            $tournoi->joueur()->attach($idPlayer);
+            $tournoi->save();
+        }
+        
+       return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
     }
 
     /**
