@@ -43,10 +43,24 @@ class TournoisController extends Controller
     }
 
     public function createPlayer(){
-        $player = Joueurs::all();
+        $tournois = Tournois::all();
+        $player = Joueur::all();
+        $statuts = Statut::all();
         return view('tournois/modalAddPlayer') ->with('data', [
+            'tournois' => $tournois,
             'joueurs' => $player,
+            'statuts' => $statuts
         ]);
+    }
+
+    public function storePlayer(Request $request, int $id_tournois) {
+        $request->validate([
+            'idPlayer' => 'required|string|int'
+        ]);
+
+        $tournoi = Tournois::find($id_tournois);
+        $tournoi->joueur()->attach($request->idPlayer);
+
     }
 
     /**
