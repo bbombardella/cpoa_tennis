@@ -65,7 +65,7 @@ class TournoisController extends Controller
             $tournoi->save();
         }
         
-       return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
+       return redirect("/tournois/$id_tournois/joueurs")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
     }
 
     public function listPlayer(int $id_tournois) {
