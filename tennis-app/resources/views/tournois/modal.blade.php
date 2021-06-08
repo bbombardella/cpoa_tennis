@@ -66,9 +66,9 @@
 
                 <div class="col-sm-9">
                     <select id="idStatut" class="block mt-1 mr-3" type="int" name="idStatut" :value="old('idStatut')" required autofocus>
-                        <option value="3" selected="selected">En cours</option>
-                        <option value="4">En attente</option>
-                        <option value="5">Terminé</option>
+                        @foreach ($data['statuts'] as $statut)
+                            <option value="{{ $statut->id }}">{{ $statut->nom }}</option>
+                        @endforeach
                     </select>
                 </div>
 

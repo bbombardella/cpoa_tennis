@@ -9,6 +9,12 @@ class Tournois extends Model
 {
     use HasFactory;
 
+    protected $table = 'tournois';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $keytype = 'int';
+    public $timestamps = false;
+
     protected $fillable = [
         'lieu',
         'date',
@@ -20,13 +26,8 @@ class Tournois extends Model
     ];
 
     public function statut(){
-        return $this->hasOne(Statut::class, 'idStatut');
+        return $this->belongsTo(Statut::class, 'idStatut');
     }
-    protected $table = 'tournois';
-    protected $primaryKey = 'id';
-    public $incrementing = true;
-    protected $keytype = 'int';
-    public $timestamps = false;
 
     public function joueur()
     {
