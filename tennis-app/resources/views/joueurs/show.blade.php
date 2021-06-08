@@ -44,6 +44,7 @@
                             @include('joueurs/ajout_favoris')
                             
                         @endif
+                        @include('joueurs/modifier')
                     </div>
                 </div>
             </div>

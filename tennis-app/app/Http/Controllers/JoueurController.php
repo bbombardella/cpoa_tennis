@@ -62,6 +62,18 @@ class JoueurController extends Controller
         ]);
     }
 
+    public function edit($id) {
+        $joueur = Joueur::find($id);
+        $user = Auth::user();
+        if($user) {
+            $favoris = $user->joueur;
+        }
+        return view('joueurs/modal_edit')->with('data', [
+            'joueur' => $joueur,
+            'favoris' => $favoris
+        ]);
+    }
+
     /**
      * Store a new flight in the database.
      *
@@ -88,5 +100,27 @@ class JoueurController extends Controller
 
         return redirect()->route('joueurs')->with('successMsg', 'Joueur ajouté avec succès !');
 
-    }       
+    }
+    
+    public function store_edit($id ,Request $request)
+    {
+        $request->validate([
+            'nom' => 'required|string',
+            'prenom' => 'required|string',
+            'niveau' => 'required|string',
+            'club' => 'required|string'
+        ]);
+        
+        $joueur =Joueur::find($id);
+        $joueur->nom=$request['nom'];
+        $joueur->prenom=$request['prenom'];
+        $joueur->niveau=$request['niveau'];
+        $joueur->club=$request['club'];
+
+        
+        $joueur->save();
+
+        return redirect()->route('joueurs/id',$id)->with('successMsg', 'Joueur modifier avec succès !');
+
+    }
 }
