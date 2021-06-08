@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Joueur;
+use Favoris;
 use Illuminate\Support\Facades\Auth;
 
 class JoueurController extends Controller
@@ -27,8 +28,23 @@ class JoueurController extends Controller
 
     public function show($id) {
         $joueur = Joueur::find($id);
+        $user = Auth::user();
+        if($user) {
+            $favs = $user->joueur;
+        }
+        $favoris=FALSE;
+
+        foreach($favs as $fav){
+            if ($fav->id == $id){
+                $favoris=TRUE;
+            }
+        }
+
         if($joueur) {
-            return view('joueurs/show')->with('joueur', $joueur);
+            return view('joueurs/show')->with('data', [
+                'joueur'=> $joueur,
+                'favoris' => $favoris,
+            ]);
         } else {
             abort(404, 'Joueur non trouvé !');
         }

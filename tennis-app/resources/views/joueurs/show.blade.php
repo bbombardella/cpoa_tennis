@@ -21,25 +21,29 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h3 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
-                        Informations sur le joueur {{ $joueur->id }}
+                        Informations sur le joueur {{ $data['joueur']->id }}
                     </h3>
                     <div>
                         <ul>
                             <li>
-                                {{ $joueur->nom }}
+                                {{ $data['joueur']->nom }}
                             </li>
                             <li>
-                                {{ $joueur->prenom }}
+                                {{ $data['joueur']->prenom }}
                             </li>
                             <li>
-                                {{ $joueur->niveau }}
+                                {{ $data['joueur']->niveau }}
                             </li>
                             <li>
-                                {{ $joueur->club }}
+                                {{ $data['joueur']->club }}
                             </li>
                         </ul>
-                        @include('joueurs/ajout_favoris')
-                        @include('joueurs/Retirer_favoris')
+                        @if ($data['favoris'])
+                            @include('joueurs/Retirer_favoris')
+                        @else
+                            @include('joueurs/ajout_favoris')
+                            
+                        @endif
                     </div>
                 </div>
             </div>

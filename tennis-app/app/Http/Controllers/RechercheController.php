@@ -35,9 +35,6 @@ class RechercheController extends Controller
                 abort(404, 'Tournois non trouvé !');
             }
         }
-
-        
-
     }
 
 }
