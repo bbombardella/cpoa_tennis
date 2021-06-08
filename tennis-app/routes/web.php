@@ -42,6 +42,7 @@ Route::post('/tournois/create', [TournoisController::class, 'store'])->middlewar
 Route::get('/tournois/{id_tournois}/joueurs', [TournoisController::class, 'listPlayer']);
 Route::get('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'createPlayer'])->name('tournois/associate');
 Route::post('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'storeplayer']);
+Route::post('/tournois/{id_tournois}/joueurs/dissociate', [TournoisController::class, 'removeplayer']);
 Route::get('/tournois/{id}', [TournoisController::class, 'show']);
 
 

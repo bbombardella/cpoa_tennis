@@ -50,6 +50,10 @@ class RegisteredUserController extends Controller
 
         $user->assignRole($request->roles);
 
+        #if($request->roles === 'Organisateur') {
+            #$user->givePermissionTo('edit');
+        #}
+
         event(new Registered($user));
 
         Auth::login($user);

@@ -9,12 +9,15 @@ use App\Models\Tournois;
 class TourController extends Controller
 {
     public function index($id_tournois) {
-        if(!Tournois::find($id_tournois)) {
+        $tournois = Tournois::find($id_tournois);
+        if(!$tournois) {
             abort(404);
         }
         $tours = Tour::where('idTournois', $id_tournois)->get();
+        $enough_player = (((count($tournois->joueur)-1) & count($tournois->joueur))==0 && count($tournois->joueur)!=0);
         return view('tour/list')->with('data', [
-            'id_tournois' => $id_tournois,
+            'tournois' => $tournois,
+            'enough_player' => $enough_player,
             'tours' => $tours
         ]);
     }
