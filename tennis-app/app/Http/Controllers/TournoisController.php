@@ -102,6 +102,6 @@ class TournoisController extends Controller
 
         $tournois->save();
 
-        return Redirect::back()->with('successMsg', 'Tournoi créé avec succès !');
+        return redirect("/tournois")->with('successMsg', 'Tournoi créé avec succès !');
     }       
 }
