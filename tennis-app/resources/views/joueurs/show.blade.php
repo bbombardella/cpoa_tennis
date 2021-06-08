@@ -47,6 +47,7 @@
                         @role('Organisateur')
                         @include('joueurs/modifier')
                         @endrole
+                        @include('joueurs/retour')
                     </div>
                 </div>
             </div>
