@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Models\Tournois;
 use App\Models\Statut;
@@ -67,6 +68,13 @@ class TournoisController extends Controller
        return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
     }
 
+    public function listPlayer(int $id_tournois) {
+        $tournois = Tournois::find($id_tournois);
+        return view('tournois/listPlayer')->with('data', [
+            'tournois' => $tournois
+        ]);
+    }
+
     /**
      * Store a new flight in the database.
      *
@@ -75,21 +83,20 @@ class TournoisController extends Controller
      */
     public function store(Request $request)
     {
-        /*
         $request->validate([
             'lieu' => 'required|string',
             'date' => 'required|Date',
-            'etat' => 'required|int'
-        ]);*/
-        $tournois= ([            
+            'idStatut' => 'required|int'
+        ]);
+
+        $tournois= Tournois::create([            
             'lieu' => $request->lieu,
             'date' => $request->date,
             'idStatut' => $request->idStatut
         ]);
 
-        //$tournois->save();
-        $id = DB::table('Tournois')->insertGetId($tournois);
-        return redirect("/tournois/$id/joueurs/associate");//->with('successMsg', 'Tournoi créé avec succès !');
+        $tournois->save();
 
+        return Redirect::back()->with('successMsg', 'Tournoi créé avec succès !');
     }       
 }
