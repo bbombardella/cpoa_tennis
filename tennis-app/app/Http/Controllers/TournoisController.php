@@ -64,6 +64,13 @@ class TournoisController extends Controller
 
     }
 
+    public function listPlayer(int $id_tournois) {
+        $tournois = Tournois::find($id_tournois);
+        return view('tournois/listPlayer')->with('data', [
+            'tournois' => $tournois
+        ]);
+    }
+
     /**
      * Store a new flight in the database.
      *
