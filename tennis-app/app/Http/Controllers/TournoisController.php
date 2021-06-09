@@ -133,20 +133,31 @@ class TournoisController extends Controller
 
         return redirect("/tournois")->with('successMsg', 'Tournoi créé avec succès !');
     }
-    
-    public function changeState($id_tournois){
-        $tournoi=Tournois::find($id_tournois);
-        if($id_tournois==4){
-            DB::table('Tournois')
-                ->where('id','=',$id_tournois)
-                ->update(['idStatus'=>3]);
-        }else{
-            if($id_tournois==3){
-                DB::table('Tournois')
-                ->where('id','=',$id_tournois)
-                ->update(['idStatus'=>4]);
-            }
+
+    public function formChangeState($id_tournois) {
+        $tournois = Tournois::find($id_tournois);
+        $statut = Statut::find($tournois->idStatut);
+        $statuts = Statut::all();
+        if($tournois) {
+            return view('tournois/modalChangeState')->with('data', [
+                'tournois' =>$tournois,
+                'statut' => $statut,
+                'statuts' => $statuts
+            ]);
+        } else {
+            abort(404, 'tournoi non trouvé !');
         }
+    }
+    
+    public function changeState(Request $request, int $id_tournois){
+        $tournoi=Tournois::find($id_tournois);
+
+        $request->validate([
+            'idStatut' => 'required|string|integer'
+        ]);
+
+        $tournoi->idStatut=$request->idStatut;
+        $tournoi->save();
 
         return redirect("/tournois/$id_tournois");
     }
