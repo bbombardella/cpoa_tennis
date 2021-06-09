@@ -21,13 +21,14 @@ class TournoisController extends Controller
     {
         $tournois = Tournois::all();
         
-        /*$statut=[0];
+        $statut=[];
         foreach ($tournois as $tournoi){
-            $statut= array_push($statut, Statut::find($tournoi->idStatut));
-        }*/
+            array_push($statut, Statut::find($tournoi->idStatut));
+        }
+        
         return view('tournois/list')->with('data', [
             'tournois' => $tournois,
-            /*'statut'=>$statut*/
+            'statut'=>$statut
         ]);
 
     }

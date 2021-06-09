@@ -40,45 +40,15 @@ class AuthenticatedSessionController extends Controller
 
     public function not_login(Request $request)
     {
-        /*if (!User::where('name', 'Visiteur')) {
-            $request=User::create([
-                'name' => 'Visiteur',
-                'email' => 'visiteur@hotmail.fr',
-                'password' => Hash::make('Visiteur'),
-            ]);
-        }
-        
-        $credentials = [
-            'email' => 'visiteur@visiteur.visiteur',
-            'password' => 'visiteur'
-        ];
-
-        if (Auth::attempt($credentials)) {
+        $guest = User::where('name', 'Visiteur')->first();
+        if(Auth::loginUsingId($guest->id)) {
             $request->session()->regenerate();
-            return back()->withErrors([
-                'email' => 'Connecté',
-            ]);
-        }
-
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);*/
-
-        if(Auth::loginUsingId(23)) {
-            $request->session()->regenerate();
-            return back()->withErrors([
-                'email' => 'Connecté',
-            ]);
+            return redirect()->intended(RouteServiceProvider::HOME);
         }
 
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);
-        /*$request->authenticate();
-
-        $request->session()->regenerate();
-
-        return redirect()->intended(RouteServiceProvider::HOME);*/
     }
 
     /**
