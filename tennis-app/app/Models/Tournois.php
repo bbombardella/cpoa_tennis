@@ -14,6 +14,7 @@ class Tournois extends Model
     public $incrementing = true;
     protected $keytype = 'int';
     public $timestamps = false;
+    protected $dateFormat = 'Y-m-d';
 
     protected $fillable = [
         'lieu',

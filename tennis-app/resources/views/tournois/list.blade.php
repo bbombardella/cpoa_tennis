@@ -25,10 +25,10 @@
                     </h3>
                     <div>
                         <ul>
-                            @foreach ($data['tournois'] as $tournoi)
+                            @foreach ($data['tournois'] as $tournoi )
                                 <li>
                                     <p>
-                                        <a class="underline" href="{{ url('/tournois/'.$tournoi->id) }}">{{ $tournoi->id }} {{ $tournoi->lieu }} {{ $tournoi->date }}</a>
+                                        <a class="underline" href="{{ url('/tournois/'.$tournoi->id) }}">{{ $tournoi->id }} {{ $tournoi->lieu }} {{ $tournoi->date->format('d/m/Y') }}</a>
                                     </p>
                                 </li>
                             @endforeach
