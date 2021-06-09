@@ -63,12 +63,20 @@
                 </x-button>
             </div>
 
-            {{--Ici pour l'instant le lien renvoie à la connexion, il faudra juste changer la route quand elle aura été créée--}}
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Continuer sans se connecter') }}
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('S\'inscrire') }}
                 </a>
             </div>
+            
         </form>
+        {{--Ici pour l'instant le lien renvoie à la connexion, il faudra juste changer la route quand elle aura été créée--}}
+            <div class="flex items-center justify-end mt-4">
+                <form method="POST" action="{{ url('coming_without') }}">
+                    <x-button class="ml-3" type='submit'>
+                        {{ __('Continuer sans se connecter') }}
+                    </x-button>
+                </form>
+            </div>
     </x-auth-card>
 </x-guest-layout>
