@@ -48,6 +48,10 @@ class TournoisController extends Controller
         $player = Joueur::all();
         $statuts = Statut::all();
         $joueur_tournoi = $tournois->joueur;
+        if(count($joueur_tournoi)>0)
+        {
+            $player=$player->diff($joueur_tournoi);
+        }
         return view('tournois/modalAddPlayer') ->with('data', [
             'tournois' => $tournois,
             'joueurs' => $player,
@@ -72,15 +76,13 @@ class TournoisController extends Controller
         ]);*/
 
         $tournoi = Tournois::find($id_tournois);
+        $joueur = Joueur::all();
         foreach($request->joueur as $idPlayer) {
-            $player = Joueur::find($idPlayer);
-            if($tournoi->joueur->isEmpty()){
             $tournoi->joueur()->attach($idPlayer);
             $tournoi->save();
-            }
         }
         
-       return redirect("/tournois/$id_tournois/joueurs")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
+       return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
     }
 
     public function listPlayer(int $id_tournois) {
