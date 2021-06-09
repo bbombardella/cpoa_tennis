@@ -90,12 +90,8 @@
             <form method="POST" action="{{ url('/tournois/' . $data['tournois']->id . '/joueurs/dissociate') }}">
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex-column">
                     <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
-                        <div class="bg-gray-50 px-4 py-3 sm:flex-column">
-                            <input type="submit" name="removePlayer" value="Retirer"
-                                class="mr-2 inline-flex justify-center rounded-md px-2 bg-blue-600 font-medium text-white">
-                            <div>
-                                <x-label for="Joueur_tournoi" :value="__('Joueurs déjà présents')" />
-
+                        <div>
+                            <x-label for="Joueur_tournoi" :value="__('Joueurs déjà présents')" />
                                 <div>
                                     <select multiple="multiple" id="idPlayer" class="block mt-1 mr-3" type="string"
                                         name="joueur[]" required autofocus>
@@ -113,7 +109,12 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="bg-gray-50 px-4 py-3 sm:flex-column">
+                                <input type="submit" name="removePlayer" value="Retirer"
+                                    class="mr-2 inline-flex justify-center rounded-md px-2 bg-blue-600 font-medium text-white">
+                            <div>
                         </div>
+                        
                     </div>
                 </div>
             </form>
