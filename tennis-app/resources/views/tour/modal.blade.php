@@ -38,40 +38,27 @@
             </h3>
             <div class="mt-2">
               <p class="text-sm text-gray-500">
-                Veuillez entrer les données du joueur
+                Sélectionnez l'état actuel du tour {{ $data['nb_tours_now'] }}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <form method="POST" action="{{ url('/joueurs/create') }}">
+      <form method="POST" action="{{ url('/tournois/'.$data['tournois']->id.'/tour/create') }}">
 
       <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
-            <div>
-                <x-label for="nom" :value="__('Nom')" />
+              <div>
+                  <x-label for="idStatut" :value="__('Statut')" />
 
-                <x-input id="nom" class="block mt-1 mr-3" type="text" name="nom" :value="old('nom')" required autofocus />
-            </div>
-
-            <div>
-                <x-label for="prenom" :value="__('Prénom')" />
-
-                <x-input id="prenom" class="block mt-1 mr-3" type="text" name="prenom" :value="old('prenom')" required autofocus />
-            </div>
-        </div>
-
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
-            <div>
-                <x-label for="niveau" :value="__('Niveau')" />
-
-                <x-input id="niveau" class="block mt-1 mr-3" type="text" name="niveau" :value="old('niveau')" required autofocus />
-            </div>
-
-            <div>
-                <x-label for="club" :value="__('Club')" />
-
-                <x-input id="club" class="block mt-1 mr-3" type="text" name="club" :value="old('club')" required autofocus />
-            </div>
+                  <div class="col-sm-9">
+                      <select id="idStatut" class="block mt-1 mr-3" type="int" name="idStatut"
+                          :value="old('idStatut')" required autofocus>
+                          @foreach ($data['statuts'] as $statut)
+                              <option value="{{ $statut->id }}">{{ $statut->nom }}</option>
+                          @endforeach
+                      </select>
+                  </div>
+              </div>
         </div>
 
         

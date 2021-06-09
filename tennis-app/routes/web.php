@@ -43,13 +43,14 @@ Route::get('/tournois/{id_tournois}/joueurs', [TournoisController::class, 'listP
 Route::get('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'createPlayer'])->name('tournois/associate');
 Route::post('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'storeplayer']);
 Route::post('/tournois/{id_tournois}/joueurs/dissociate', [TournoisController::class, 'removeplayer']);
-Route::get('/tournois/{id}', [TournoisController::class, 'show']);
 
-
-Route::get('/tournois/{id_tournois}/tour', [TourController::class, 'index']);
-Route::get('/tournois/{id_tournois}/tour/{id_tour}', [TourController::class, 'show']);
+Route::get('/tournois/{id_tournois}/tour', [TourController::class, 'index'])->name('tournois_tour');
 Route::get('/tournois/{id_tournois}/tour/create', [TourController::class, 'create']);
 Route::post('/tournois/{id_tournois}/tour/create', [TourController::class, 'store']);
+Route::get('/tournois/{id_tournois}/tour/{id_tour}', [TourController::class, 'show']);
+
+Route::get('/tournois/{id}', [TournoisController::class, 'show']);
+
 
 Route::get('/tour/{id_tour}/match', [MatchController::class, 'index']);
 Route::get('/tour/{id_tour}/match/{id_match}', [MatchController::class, 'show']);
