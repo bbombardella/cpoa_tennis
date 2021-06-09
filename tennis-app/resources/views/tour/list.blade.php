@@ -23,8 +23,10 @@
                     <h3 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
                         Les tours du tournois {{ $data['tournois']->id }}
                     </h3>
+        
                     @if ($data['enough_player'])
                     <p>Il y a <strong>{{ $data['nb_joueurs'] }} joueurs</strong> dans ce tournois.</p>
+                    @role('Organisateur')
                         @if ($data['nb_tours_dispo']>0)
                             <p>Vous pouvez créer <strong>{{ $data['nb_tours_dispo'] }}</strong> 
                                 @if ($data['nb_tours_dispo']==1)
@@ -36,6 +38,7 @@
                         @else
                             <p class="text-red-500">Vous ne pouvez pas créer d'autres tours.</p>
                         @endif
+                    @endrole
                         <div>
                             <ul>
                                 @forelse ($data['tours'] as $tour)
@@ -50,6 +53,7 @@
                             </ul>
                         </div>
                     </div>
+                    @role('Organisateur')
                     @if ($data['nb_tours_dispo']>0)
                         <div class="p-6 bg-white border-b border-gray-200">
                             <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['tournois']->id.'/tour/create') }}">
@@ -71,6 +75,7 @@
                         </a> 
                     </div>
                     @endif
+                    @endrole
             </div>
         </div>
     </div>
