@@ -1,4 +1,4 @@
-<div class="mt-5 bg-white">
+<div class="mt-3 bg-white">
     <form method="post" action='{{ url("/joueurs/favoris/remove/".$data['joueur']->id) }}'>
         <x-button name="Remove" class="addFav" type="submit">
             Retirer des favoris

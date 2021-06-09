@@ -37,6 +37,21 @@
                             <li>
                                 Club: {{ $data['joueur']->club }}
                             </li>
+                            <div class="m-1 font-semibold text-gray-800">
+                            -Statistique
+                            </div>
+                            <li>
+                                Victoire: {{ $data['victoire']}}
+                            </li>
+                            <li>
+                                Défaite: {{ $data['defaite'] }}
+                            </li>
+                            <li>
+                                Tournois gagné: {{ $data['tournoi_gagne'] }}
+                            </li>
+                            <li>
+                                Nombre d'inscription: {{ $data['nb_tournoi'] }}
+                            </li>
                         </ul>
                         @role('Visiteur|Organisateur')
                             @if ($data['favoris'])

@@ -84,8 +84,8 @@ class TourController extends Controller
         ]);
     }
 
-    public function delete($id) {
-        $tour = Tour::find($id_tournois);
+    public function delete($id_tournois, $id_tour) {
+        $tour = Tour::find($id_tour);
         if(!$tour) {
             abort(404);
         }

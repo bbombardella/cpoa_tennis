@@ -20,10 +20,10 @@ class Tour extends Model
     public $timestamps = false;
 
     public function statut() {
-        return $this->hasOne(Statut::class, 'idStatut');
+        return $this->hasOne(Statut::class, 'id', 'idStatut');
     }
 
     public function tournois() {
-        return $this->hasOne(Tournois::class, 'idTournois');
+        return $this->hasOne(Tournois::class, 'id', 'idTournois');
     }
 }
