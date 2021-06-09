@@ -23,11 +23,15 @@
                     <h3 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
                         Les Joueurs
                     </h3>
-                    @include('joueurs/favoris')
+                    @role('Visiteur|Organisateur')
+                        @include('joueurs/favoris')
+                    @endrole
                     <div>
-                    <h4 class="font-semibold text-xl text-gray-800 leading-tight mb-2 mt-4 ml-2">
+                    @role('Visiteur|Organisateur')
+                        <h4 class="font-semibold text-xl text-gray-800 leading-tight mb-2 mt-4 ml-2">
                             Liste complète
                         </h4>
+                    @endrole
                         <ul>
                             @foreach ($data['joueurs'] as $joueur)
                                 <li>
