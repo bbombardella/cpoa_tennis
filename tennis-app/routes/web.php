@@ -49,6 +49,7 @@ Route::post('/tournois/{id_tournois}/changeState', [TournoisController::class, '
 Route::get('/tournois/{id_tournois}/tour', [TourController::class, 'index'])->name('tournois_tour');
 Route::get('/tournois/{id_tournois}/tour/create', [TourController::class, 'create']);
 Route::post('/tournois/{id_tournois}/tour/create', [TourController::class, 'store']);
+Route::get('/tournois/{id_tournois}/tour/{id_tour}/remove', [TourController::class, 'delete']);
 Route::get('/tournois/{id_tournois}/tour/{id_tour}', [TourController::class, 'show']);
 
 Route::get('/tournois/{id}', [TournoisController::class, 'show']);
