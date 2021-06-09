@@ -38,12 +38,13 @@
                                 Club: {{ $data['joueur']->club }}
                             </li>
                         </ul>
-                        @if ($data['favoris'])
-                            @include('joueurs/Retirer_favoris')
-                        @else
-                            @include('joueurs/ajout_favoris')
-                            
-                        @endif
+                        @role('Visiteur|Organisateur')
+                            @if ($data['favoris'])
+                                @include('joueurs/Retirer_favoris')
+                            @else
+                                @include('joueurs/ajout_favoris')
+                            @endif
+                        @endrole
                         @role('Organisateur')
                             @include('joueurs/modifier')
                         @endrole
