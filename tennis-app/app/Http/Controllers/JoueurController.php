@@ -36,13 +36,9 @@ class JoueurController extends Controller
         $user = Auth::user();
         if($user) {
             $favs = $user->joueur;
-        }
-        $favoris=FALSE;
-
-        foreach($favs as $fav){
-            if ($fav->id == $id){
-                $favoris=TRUE;
-            }
+            $favoris=$favs->contains($joueur);
+        } else {
+            $favoris=false;
         }
 
         $nb_tournois=count($joueur->tournois);
@@ -78,13 +74,9 @@ class JoueurController extends Controller
         $user = Auth::user();
         if($user) {
             $favs = $user->joueur;
-        }
-        $favoris=FALSE;
-
-        foreach($favs as $fav){
-            if ($fav->id == $id){
-                $favoris=TRUE;
-            }
+            $favoris=$favs->contains($joueur);
+        } else {
+            $favoris=false;
         }
 
         $nb_tournois=count($joueur->tournois);
