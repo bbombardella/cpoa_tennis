@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 
-dump(Auth::authenticate());
+//dump(Auth::authenticate());
 
 @endphp
 

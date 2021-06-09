@@ -41,11 +41,11 @@
                             Voir les tours
                         </x-button> 
                     </a> 
-                    <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/tour") }}''>
+                    <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/changeState") }}''>
                         <x-button name="changeTournoisState" class="changeTournoisState mt-5" type="button">
-                        @if($data['statut']->idStatut == 3)
+                        @if($data['statut']->nom == "En cours")
                             Terminé le tournoi
-                        @elseif($data['statut']->idStatut == 4)
+                        @elseif($data['statut']->nom == "En attente")
                             Démarrer le tournoi
                         @else
                             Tournoi Terminé
