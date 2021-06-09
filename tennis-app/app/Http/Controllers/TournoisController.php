@@ -135,7 +135,7 @@ class TournoisController extends Controller
     }
 
     public function formChangeState($id_tournois) {
-        $tournois = Tournois::find($id);
+        $tournois = Tournois::find($id_tournois);
         $statut = Statut::find($tournois->idStatut);
         $statuts = Statut::all();
         if($tournois) {
