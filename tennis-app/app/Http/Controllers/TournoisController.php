@@ -49,8 +49,13 @@ class TournoisController extends Controller
     public function create() {
         $tournois= Tournois::all();
         $statuts = Statut::all();
+        $statut=[];
+        foreach ($tournois as $tournoi){
+            array_push($statut, Statut::find($tournoi->idStatut));
+        }
         return view('tournois/modal')->with('data', [
             'tournois' => $tournois,
+            'statut' => $statut,
             'statuts' => $statuts
         ]);
     }
