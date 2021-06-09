@@ -24,33 +24,41 @@
                         Les tours du tournois {{ $data['tournois']->id }}
                     </h3>
                     @if ($data['enough_player'])
-                    <p>Il y a <strong>{{ count($data['tournois']->joueur) }} joueurs</strong> dans ce tournois.</p>
-                    <p>Vous pouvez créer <strong>{{ (count($data['tournois']->joueur))/2 }}</strong> 
-                        @if ((count($data['tournois']->joueur))/2==1)
-                            tour
+                    <p>Il y a <strong>{{ $data['nb_joueurs'] }} joueurs</strong> dans ce tournois.</p>
+                        @if ($data['nb_tours_dispo']>0)
+                            <p>Vous pouvez créer <strong>{{ $data['nb_tours_dispo'] }}</strong> 
+                                @if ($data['nb_tours_dispo']==1)
+                                    tour
+                                @else
+                                    tours
+                                @endif
+                            </p>    
                         @else
-                            tours
+                            <p class="text-red-500">Vous ne pouvez pas créer d'autres tours.</p>
                         @endif
-                    </p>
                         <div>
                             <ul>
-                                @foreach ($data['tours'] as $tour)
+                                @forelse ($data['tours'] as $tour)
                                     <li>
                                         <p>
-                                            <a class="underline" href="{{ url('/joueurs/') }}"></a>
+                                            <a class="underline" href="{{ url('/joueurs/') }}">Tour {{ $tour->id }}</a>
                                         </p>
                                     </li>
-                                @endforeach
+                                @empty
+                                    <p>Il n'y a pas encore de tours dans ce tournois.</p>
+                                @endforelse
                             </ul>
                         </div>
                     </div>
-                    <div class="p-6 bg-white border-b border-gray-200">
-                        <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['tournois']->id.'/tour/create') }}">
-                            <x-button name="createJoueur" class="createJoueur" type="button">
-                                Créer un tour
-                            </x-button> 
-                        </a>  
-                    </div>
+                    @if ($data['nb_tours_dispo']>0)
+                        <div class="p-6 bg-white border-b border-gray-200">
+                            <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['tournois']->id.'/tour/create') }}">
+                                <x-button name="createJoueur" class="createJoueur" type="button">
+                                    Créer un tour
+                                </x-button> 
+                            </a>  
+                        </div>
+                    @endif
                     @else
                     <p class="text-red-500"><strong>Vous ne pouvez pas créer de tours car vous n'avez pas assez de joueurs.</strong> Vous n'avez que {{count($data['tournois']->joueur)}} joueurs.</p>
                     <p class="text-red-500">Veuillez enlever ou ajouter des joueurs.</p>

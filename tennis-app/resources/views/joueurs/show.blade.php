@@ -21,21 +21,21 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h3 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
-                        Informations sur le joueur {{ $data['joueur']->id }}
+                        Informations sur  {{ $data['joueur']->nom }} {{ $data['joueur']->prenom }}
                     </h3>
                     <div>
                         <ul>
                             <li>
-                                {{ $data['joueur']->nom }}
+                                Nom: {{ $data['joueur']->nom }}
                             </li>
                             <li>
-                                {{ $data['joueur']->prenom }}
+                                Prenom: {{ $data['joueur']->prenom }}
                             </li>
                             <li>
-                                {{ $data['joueur']->niveau }}
+                                Niveau: {{ $data['joueur']->niveau }}
                             </li>
                             <li>
-                                {{ $data['joueur']->club }}
+                                Club: {{ $data['joueur']->club }}
                             </li>
                         </ul>
                         @if ($data['favoris'])
@@ -47,9 +47,10 @@
                         @role('Organisateur')
                             @include('joueurs/modifier')
                         @endrole
-                        @include('joueurs/retour')
+                        
                     </div>
                 </div>
+                @include('joueurs/retour')
             </div>
         </div>
     </div>

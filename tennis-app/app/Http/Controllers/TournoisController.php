@@ -10,6 +10,8 @@ use App\Models\Tournois;
 use App\Models\Statut;
 use App\Models\Joueur;
 
+use function App\Models\statut;
+
 class TournoisController extends Controller
 {
     /**
@@ -18,17 +20,26 @@ class TournoisController extends Controller
     public function index()
     {
         $tournois = Tournois::all();
-
+        
+        /*$statut=[0];
+        foreach ($tournois as $tournoi){
+            $statut= array_push($statut, Statut::find($tournoi->idStatut));
+        }*/
         return view('tournois/list')->with('data', [
-            'tournois' => $tournois
+            'tournois' => $tournois,
+            /*'statut'=>$statut*/
         ]);
 
     }
 
-    public function show($lieu) {
-        $tournois = Tournois::find($lieu);
+    public function show($id) {
+        $tournois = Tournois::find($id);
+        $statut = Statut::find($tournois->idStatut);
         if($tournois) {
-            return view('tournois/show')->with('tournoi', $tournois);
+            return view('tournois/show')->with('data', [
+                'tournois' =>$tournois,
+                'statut' => $statut,
+            ]);
         } else {
             abort(404, 'tournoi non trouvé !');
         }
@@ -48,6 +59,10 @@ class TournoisController extends Controller
         $player = Joueur::all();
         $statuts = Statut::all();
         $joueur_tournoi = $tournois->joueur;
+        if(count($joueur_tournoi)>0)
+        {
+            $player=$player->diff($joueur_tournoi);
+        }
         return view('tournois/modalAddPlayer') ->with('data', [
             'tournois' => $tournois,
             'joueurs' => $player,
@@ -72,15 +87,13 @@ class TournoisController extends Controller
         ]);*/
 
         $tournoi = Tournois::find($id_tournois);
+        $joueur = Joueur::all();
         foreach($request->joueur as $idPlayer) {
-            $player = Joueur::find($idPlayer);
-            if($tournoi->joueur->isEmpty()){
             $tournoi->joueur()->attach($idPlayer);
             $tournoi->save();
-            }
         }
         
-       return redirect("/tournois/$id_tournois/joueurs")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
+       return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
     }
 
     public function listPlayer(int $id_tournois) {
@@ -113,5 +126,22 @@ class TournoisController extends Controller
         $tournois->save();
 
         return redirect("/tournois")->with('successMsg', 'Tournoi créé avec succès !');
-    }       
+    }
+    
+    public function changeState($id_tournois){
+        $tournoi=Tournois::find($id_tournois);
+        if($id_tournois==4){
+            DB::table('Tournois')
+                ->where('id','=',$id_tournois)
+                ->update(['idStatus'=>3]);
+        }else{
+            if($id_tournois==3){
+                DB::table('Tournois')
+                ->where('id','=',$id_tournois)
+                ->update(['idStatus'=>4]);
+            }
+        }
+
+        return redirect("/tournois/$id_tournois");
+    }
 }

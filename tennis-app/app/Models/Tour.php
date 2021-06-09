@@ -12,8 +12,12 @@ class Tour extends Model
     protected $table = 'tour';
     protected $primaryKey = 'id';
     protected $fillable = [
-        'numeroDeTour'
+        'numeroDuTour',
+        'idStatut',
+        'idTournois'
     ];
+
+    public $timestamps = false;
 
     public function statut() {
         return $this->hasOne(Statut::class, 'idStatut');
