@@ -45,7 +45,7 @@
                             
                         @endif
                         @role('Organisateur')
-                        @include('joueurs/modifier')
+                            @include('joueurs/modifier')
                         @endrole
                     </div>
                 </div>
