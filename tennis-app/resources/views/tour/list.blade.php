@@ -44,7 +44,7 @@
                                 @forelse ($data['tours'] as $tour)
                                     <li>
                                         <p>
-                                            <a class="underline" href="{{ url('/joueurs/') }}">Tour
+                                            <a class="underline" href="{{ url('/tournois/'.$data['tournois']->id.'/tour/'.$tour->id) }}">Tour
                                                 {{ $tour->id }}</a>
                                         </p>
                                     </li>
