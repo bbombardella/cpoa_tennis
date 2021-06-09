@@ -10,6 +10,8 @@ use App\Models\Tournois;
 use App\Models\Statut;
 use App\Models\Joueur;
 
+use function App\Models\statut;
+
 class TournoisController extends Controller
 {
     /**
@@ -18,17 +20,26 @@ class TournoisController extends Controller
     public function index()
     {
         $tournois = Tournois::all();
-
+        
+        /*$statut=[0];
+        foreach ($tournois as $tournoi){
+            $statut= array_push($statut, Statut::find($tournoi->idStatut));
+        }*/
         return view('tournois/list')->with('data', [
-            'tournois' => $tournois
+            'tournois' => $tournois,
+            /*'statut'=>$statut*/
         ]);
 
     }
 
-    public function show($lieu) {
-        $tournois = Tournois::find($lieu);
+    public function show($id) {
+        $tournois = Tournois::find($id);
+        $statut = Statut::find($tournois->idStatut);
         if($tournois) {
-            return view('tournois/show')->with('tournoi', $tournois);
+            return view('tournois/show')->with('data', [
+                'tournois' =>$tournois,
+                'statut' => $statut,
+            ]);
         } else {
             abort(404, 'tournoi non trouvé !');
         }
