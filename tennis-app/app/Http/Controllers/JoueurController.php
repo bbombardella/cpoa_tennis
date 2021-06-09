@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Joueur;
-use Favoris;
+use App\Models\Tournois;
 use Illuminate\Support\Facades\Auth;
+
+
 
 class JoueurController extends Controller
 {
@@ -43,10 +45,16 @@ class JoueurController extends Controller
             }
         }
 
+        $nb_tournois=count($joueur->tournois);
+        
         if($joueur) {
             return view('joueurs/show')->with('data', [
                 'joueur'=> $joueur,
                 'favoris' => $favoris,
+                'victoire' => 0,
+                'defaite' => 0,
+                'tournoi_gagne' => 0,
+                'nb_tournoi' => $nb_tournois,
             ]);
         } else {
             abort(404, 'Joueur non trouvé !');
@@ -69,11 +77,25 @@ class JoueurController extends Controller
         $joueur = Joueur::find($id);
         $user = Auth::user();
         if($user) {
-            $favoris = $user->joueur;
+            $favs = $user->joueur;
         }
+        $favoris=FALSE;
+
+        foreach($favs as $fav){
+            if ($fav->id == $id){
+                $favoris=TRUE;
+            }
+        }
+
+        $nb_tournois=count($joueur->tournois);
+        
         return view('joueurs/modal_edit')->with('data', [
             'joueur' => $joueur,
-            'favoris' => $favoris
+            'favoris' => $favoris,
+            'victoire' => 0,
+            'defaite' => 0,
+            'tournoi_gagne' => 0,
+            'nb_tournoi' => $nb_tournois,
         ]);
     }
 
