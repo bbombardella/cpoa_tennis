@@ -43,6 +43,7 @@ Route::get('/tournois/{id_tournois}/joueurs', [TournoisController::class, 'listP
 Route::get('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'createPlayer'])->name('tournois/associate');
 Route::post('/tournois/{id_tournois}/joueurs/associate', [TournoisController::class, 'storeplayer']);
 Route::post('/tournois/{id_tournois}/joueurs/dissociate', [TournoisController::class, 'removeplayer']);
+Route::post('/tournois/{id_tournois}/changeState', [TournoisConstroller::class, 'formChangeState']);
 Route::post('/tournois/{id_tournois}/changeState', [TournoisConstroller::class, 'changeState']);
 
 Route::get('/tournois/{id_tournois}/tour', [TourController::class, 'index'])->name('tournois_tour');
