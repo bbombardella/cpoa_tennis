@@ -126,5 +126,22 @@ class TournoisController extends Controller
         $tournois->save();
 
         return redirect("/tournois")->with('successMsg', 'Tournoi créé avec succès !');
-    }       
+    }
+    
+    public function changeState($id_tournois){
+        $tournoi=Tournois::find($id_tournois);
+        if($id_tournois==4){
+            DB::table('Tournois')
+                ->where('id','=',$id_tournois)
+                ->update(['idStatus'=>3]);
+        }else{
+            if($id_tournois==3){
+                DB::table('Tournois')
+                ->where('id','=',$id_tournois)
+                ->update(['idStatus'=>4]);
+            }
+        }
+
+        return redirect("/tournois/$id_tournois");
+    }
 }
