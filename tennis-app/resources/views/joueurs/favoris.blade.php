@@ -3,12 +3,14 @@
         Vos favoris
     </h4>
     <ul>
-        @foreach ($data['favoris'] as $favoris)
+        @forelse ($data['favoris'] as $favoris)
             <li>
                 <p>
                     <a class="underline" href="{{ url('/joueurs/'.$favoris->id) }}">{{ $favoris->nom }} {{ $favoris->prenom }}</a>
                 </p>
             </li>
-        @endforeach
+        @empty
+            <p>Vous n'avez aucun favoris.</p>
+        @endforelse
     </ul>
 </div>

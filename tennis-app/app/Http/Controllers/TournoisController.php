@@ -56,6 +56,16 @@ class TournoisController extends Controller
         ]);
     }
 
+    public function removePlayer(Request $request, int $id_tournois){
+        $tournoi = Tournois::find($id_tournois);
+        foreach($request->joueur as $idPlayer) {
+            $tournoi->joueur()->detach($idPlayer);
+            $tournoi->save();
+        }
+
+        return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueur.euse.s retiré.e.s avec succès !');
+    }
+
     public function storePlayer(Request $request, int $id_tournois) {
         /*$request->validate([
             'idPlayer' => 'required|string|int'

@@ -18,6 +18,9 @@ class JoueurController extends Controller
         $user = Auth::user();
         if($user) {
             $favoris = $user->joueur;
+            if(count($favoris)>0) {
+                $joueurs=$joueurs->diff($favoris);
+            }
         }
         return view('joueurs/list')->with('data', [
             'joueurs' => $joueurs,
