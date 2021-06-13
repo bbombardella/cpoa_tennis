@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Joueur;
 use App\Models\Tournois;
+use App\Models\ResultatMatch;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -34,6 +35,7 @@ class JoueurController extends Controller
     public function show($id) {
         $joueur = Joueur::find($id);
         $user = Auth::user();
+        $match = ResultatMatch::all();
         if($user) {
             $favs = $user->joueur;
             $favoris=$favs->contains($joueur);
@@ -42,13 +44,14 @@ class JoueurController extends Controller
         }
 
         $nb_tournois=count($joueur->tournois);
-        
+        $victoire=count($match->where('gagnant', $joueur->id));
+        $defaite=count($match->where('perdant', $joueur->id));
         if($joueur) {
             return view('joueurs/show')->with('data', [
                 'joueur'=> $joueur,
                 'favoris' => $favoris,
-                'victoire' => 0,
-                'defaite' => 0,
+                'victoire' => $victoire,
+                'defaite' => $defaite,
                 'tournoi_gagne' => 0,
                 'nb_tournoi' => $nb_tournois,
             ]);
@@ -72,6 +75,8 @@ class JoueurController extends Controller
     public function edit($id) {
         $joueur = Joueur::find($id);
         $user = Auth::user();
+        $match = ResultatMatch::all();
+
         if($user) {
             $favs = $user->joueur;
             $favoris=$favs->contains($joueur);
@@ -80,12 +85,14 @@ class JoueurController extends Controller
         }
 
         $nb_tournois=count($joueur->tournois);
+        $victoire=count($match->where('gagnant', $joueur->id));
+        $defaite=count($match->where('perdant', $joueur->id));
         
         return view('joueurs/modal_edit')->with('data', [
-            'joueur' => $joueur,
+            'joueur'=> $joueur,
             'favoris' => $favoris,
-            'victoire' => 0,
-            'defaite' => 0,
+            'victoire' => $victoire,
+            'defaite' => $defaite,
             'tournoi_gagne' => 0,
             'nb_tournoi' => $nb_tournois,
         ]);
