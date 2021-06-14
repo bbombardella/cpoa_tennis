@@ -36,16 +36,22 @@
                             @endforelse
                         </ul>
                     </div>
-                </div>
-                @role('Organisateur')
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['tournois']->id.'/joueurs/associate') }}">
-                        <x-button name="createTournoi" class="createTournoi" type="button">
-                            Modifier les participants
-                        </x-button> 
-                    </a>  
-                </div>
+                    @role('Organisateur')
+                <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['tournois']->id.'/joueurs/associate') }}">
+                    <x-button name="createTournoi" class="createTournoi mt-5" type="button">
+                        Modifier les participants
+                    </x-button> 
+                </a>  
                 @endrole
+                </div>
+                
+                <div class="m-4 float-right">
+                <x-button type="button" class="waves-effect waves-light btn modal-trigger">
+                    <a href='{{ url('/tournois/'.$data['tournois']->id) }}'>
+                        Retour
+                    </a>
+                </x-button>
+            </div>
             </div>
         </div>
     </div>
