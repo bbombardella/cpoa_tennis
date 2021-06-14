@@ -45,7 +45,7 @@
                                     <li>
                                         <p>
                                             <a class="underline" href="{{ url('/tournois/'.$data['tournois']->id.'/tour/'.$tour->id) }}">Tour
-                                                {{ $tour->id }}</a>
+                                                {{ $tour->numeroDuTour }}</a>
                                         </p>
                                     </li>
                                 @empty
