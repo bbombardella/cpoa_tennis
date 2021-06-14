@@ -41,7 +41,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['tournois']->id.'/joueurs/associate') }}">
                         <x-button name="createTournoi" class="createTournoi" type="button">
-                            Ajouter un joueur
+                            Modifier les participants
                         </x-button> 
                     </a>  
                 </div>
