@@ -68,8 +68,14 @@ class MatchController extends Controller
             'joueur2'=> $request->joueur_2,
         ]);
         $match->save();
-        return var_dump($match);
         return redirect('/tournois/'.$id_tournoi.'/tour/'.$id_tour.'/match')->with('succesMsg', 'Match crée avec succès');
+    }
+
+    public function storePlayer(Request $request, $id_tournoi, $id_tour, $id_match){
+        $match = Match::find($id_match);
+        $match->joueur1 = $request->joueur_1;
+        $match->joueur2 = $request->joueur_2;
+        $match->save();
     }
     
     public function saisieResultat($id_tournois, $id_tour, $id_match) {
