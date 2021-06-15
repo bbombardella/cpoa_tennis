@@ -28,6 +28,6 @@ class Tour extends Model
     }
 
     public function matchs() {
-        return $this->hasMany(Match::class, 'id', 'idTour');
+        return $this->hasMany(Match::class, 'idTour', 'id');
     }
 }
