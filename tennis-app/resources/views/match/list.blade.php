@@ -29,7 +29,7 @@
                             @foreach ($data['matchs'] as $match)
                                 <li>
                                     <p>
-                                        <a class="underline" href="{{ url('/show') }}">Match {{ $match->numeroDeMatch }}</a>
+                                        <a class="underline" href="{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['id_tour'].'/match/'.$match->id) }}">Match {{ $match->numeroDeMatch }}</a>
                                     </p>
                                 </li>
                             @endforeach

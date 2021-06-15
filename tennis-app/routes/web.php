@@ -59,9 +59,9 @@ Route::get('/tournois/{id}/arbre',[TournoisController::class, 'arbre']);
 
 
 Route::get('/tournois/{id_tournois}/tour/{id_tour}/match', [MatchController::class, 'index']);
-Route::get('/tour/{id_tour}/match/{id_match}', [MatchController::class, 'show']);
 Route::get('/tournois/{id_tournois}/tour/{id_tour}/match/create', [MatchController::class, 'create']);
 Route::post('/tournois/{id_tournois}/tour/{id_tour}/match/create', [MatchController::class, 'store']);
+Route::get('/tournois/{id_tournois}/tour/{id_tour}/match/{id_match}', [MatchController::class, 'show']);
 
 Route::get('/recherche', function () {
     return view('recherche/recherche');

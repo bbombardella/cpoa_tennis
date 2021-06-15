@@ -48,9 +48,9 @@
             <div class="flex flex-1 flex-wrap flex-col justify-center items-center m-2 bg-white px-4 pb-4 sm:pb-4">
                 <form class="w-1/2 m-1" method="POST" id="ajout"
                     action="{{ url('/tournois/' . $data['id_tournois'] . '/tour/'.$data['id_tour'].'/match/create') }}">
-                    <x-label for="joueur[]" :value="__('Joueur à ajouter')" />
+                    <x-label for="joueur_1" :value="__('Joueur à ajouter')" />
                     <select id="idPlayer" class="block mt-1 mr-3 w-full" type="string"
-                        name="joueur[]" required autofocus>
+                        name="joueur_1" required autofocus>
                         @foreach ($data['joueurs'] as $joueur)
                             @CRSFs
                             <li>
@@ -61,9 +61,9 @@
                             </li>
                         @endforeach
                     </select>
-                    <x-label for="joueur[]" :value="__('Joueur à ajouter')" />
+                    <x-label for="joueur_2" :value="__('Joueur à ajouter')" />
                     <select id="idPlayer" class="block mt-1 mr-3 w-full" type="string"
-                        name="joueur[]" required autofocus>
+                        name="joueur_2" required autofocus>
                         @foreach ($data['joueurs'] as $joueur)
                             @CRSFs
                             <li>
@@ -74,13 +74,14 @@
                             </li>
                         @endforeach
                     </select>
-                </form>
-                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                <button type="button" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+                    <button type="submit" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                     <a href="{{  url('/tournois/' . $data['id_tournois'] . '/tour/'.$data['id_tour'].'/match') }}">
                       Valider
                     </a>
                 </button>
+                </form>
+                <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                
             </div>
             </div>
     </div>

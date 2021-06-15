@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Match;
 use App\Models\Tour;
 use App\Models\Tournois;
+use App\Models\ResultatMatch;
 
 class MatchController extends Controller
 {
@@ -22,18 +23,29 @@ class MatchController extends Controller
         ]);
     }
 
-    public function show($id_tour, $id_match) {
+    public function show($id_tournoi, $id_tour, $id_match) {
         $match = Match::find($id_match);
-        $resultat = ResultatMatch::find($id_match);
-        return $matchs;
+        if($resultat = ResultatMatch::find($id_match)!=null){
+            return view('match/show')->with('data', [
+                'id_tournois'=>$id_tournoi,
+                'match'=>$match,
+                'id_tour'=>$id_tour,
+                'resultats'=> $resultats,
+            ]);
+        }
+        return view('match/show')->with('data', [
+            'id_tournois'=>$id_tournoi,
+            'match'=>$match,
+            'id_tour'=>$id_tour,
+        ]);
     }
 
     public function create($id_tournois, $id_tour){
+        
         $tournoi = Tournois::find($id_tournois);
         $joueurs = $tournoi->joueur;
         $tour = Tour::find($id_tour);
         $matchs = Match::where('idTour', $id_tour)->get();
-        var_dump($matchs);
         return view('match/modalCreateMatch') -> with('data', [
             'joueurs' => $joueurs,
             'tournois' => $tournoi,
@@ -45,16 +57,19 @@ class MatchController extends Controller
     }
 
     public function store(Request $request, $id_tournoi, $id_tour){
-        $tournoi = Tournois::find($id_tournoi);
-        $nbmatch = count(Tour::where('id', $id_tour)->tournoi->match);
-        var_dump($nbmatch);
+        $match = Match::where('idTour', $id_tour)->get();
+        $nbmatch = $match->max('numeroDeMatch');
         $id_statut = (Statut::where('nom', 'En attente')->first())->id;
         $match = Match::create([
-            'numeroDeTour' => $nbmatch+1,
+            'numeroDeMatch' => $nbmatch+1,
             'idTour'=> $id_tour,
             'idStatut' => $id_statut,
+            'joueur1' => $request->joueur_1,
+            'joueur2'=> $request->joueur_2,
         ]);
         $match->save();
+        return var_dump($match);
+        return redirect('/tournois/'.$id_tournoi.'/tour/'.$id_tour.'/match')->with('succesMsg', 'Match crée avec succès');
     }
     
     public function saisieResultat($id_tour, $id_match) {
