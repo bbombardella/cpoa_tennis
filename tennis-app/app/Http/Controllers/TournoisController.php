@@ -10,6 +10,7 @@ use App\Models\Tournois;
 use App\Models\Statut;
 use App\Models\Joueur;
 use App\Models\Tour;
+use App\Models\Match;
 
 use function App\Models\statut;
 
@@ -173,20 +174,38 @@ class TournoisController extends Controller
 
         //ici on va créer les tours
         $nombre_tours=intval(log($joueurs)/log(2));
-        $nb_joueurs = count($tournoi->joueur);
-        for($i=0;$i<$nombre_tours;$i++){
-            $tours = Tour::where('idTournois', $id_tournois)->get();
-            $tour = Tour::create([
-                'numeroDuTour' => $i+1,
-                'idStatut' => 4,
-                'idTournois' => $id_tournois,
-            ]);
-            $tour->save();
-            
-        }
-        return redirect("tournois/$id_tournois");
-        //ici on va créer les matchs
-        //$tours = Tour::where('idTournois', $id_tournois);
+        $test=Tour::where('idTournois',$id_tournois)->get();
+        if($nombre_tours-count($test)!=0){
+            for($i=0;$i<$nombre_tours;$i++){    
+                $tours = Tour::where('idTournois', $id_tournois)->get();
+                $tour = Tour::create([
+                    'numeroDuTour' => $i+1,
+                    'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                    'idTournois' => $id_tournois,
+                ]);
+                $tour->save();
+                $num_tour=$tour->numeroDuTour;
+                $nb_joueurs=$joueurs/(pow(2,($num_tour-1)));
+                for($j=0;$j<$nb_joueurs/2;$j++){
+                    if($num_tour==1){
+                        $match = Match::create([
+                            'numeroDeMatch'=> $i+1,
+                            'idTour' => $tour->id,
+                            'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                        ]);
+                    }else{
+                        $match = Match::create([
+                            'numeroDeMatch'=> $i+1,
+                            'idTour' => $tour->id,
+                            'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                        ]);
+                    }
+                
+                }
+            }
 
+            //ici on va créer les matchs         
+            return redirect("tournois/$id_tournois");
+        }
     }
 }
