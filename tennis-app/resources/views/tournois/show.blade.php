@@ -1,3 +1,8 @@
+<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+<script src="dist/jquery.bracket.min.js"></script>
+
+<link href="dist/jquery.bracket.min.css" rel="stylesheet">
+
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -36,11 +41,23 @@
                             </li>
                         </ul>
                     </div>
-                    <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/tour") }}''>
-                        <x-button name="createJoueur" class="createJoueur mt-5" type="button">
-                            Voir les tours
-                        </x-button> 
-                    </a> 
+
+                    @if (!$data['generate'])
+                        <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/tour") }}''>
+                            <x-button name="createJoueur" class="createJoueur mt-5" type="button">
+                                Générer tournoi
+                            </x-button> 
+                        </a> 
+                    @else 
+                        <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/tour") }}''>
+                            <x-button name="createJoueur" class="createJoueur mt-5" type="button">
+                                Afficher l'arbre
+                            </x-button> 
+                        </a>
+                    @endif
+
+                    
+
                     @role('Organisateur')
                     <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/changeState") }}''>
                         <x-button name="changeTournoisState" class="changeTournoisState mt-5" type="button">
