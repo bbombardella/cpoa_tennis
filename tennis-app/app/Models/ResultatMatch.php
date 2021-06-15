@@ -13,8 +13,9 @@ class ResultatMatch extends Model
     protected $primaryKey = 'idMatch';
     public $timestamps = false;
     protected $fillable = [
-        'scoreGagnant',
-        'scorePerdant',
+        'idMatch',
+        'score_gagnant',
+        'score_perdant',
         'gagnant',
         'perdant'
     ];
