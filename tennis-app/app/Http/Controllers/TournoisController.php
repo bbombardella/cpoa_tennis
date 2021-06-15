@@ -38,11 +38,19 @@ class TournoisController extends Controller
     public function show($id) {
         $tournois = Tournois::find($id);
         $statut = Statut::find($tournois->idStatut);
+        $tours = Tour::all();
+        if (count($tours->where('idTournois',$tournois->id))){
+            $generate=true;
+
+        }else{
+            $generate=false;
+        }
+
         if($tournois) {
             return view('tournois/show')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
-                'generate' => true,
+                'generate' => $generate,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
@@ -61,6 +69,28 @@ class TournoisController extends Controller
             'statut' => $statut,
             'statuts' => $statuts
         ]);
+    }
+
+    public function arbre($id){
+        $tournois = Tournois::find($id);
+        $statut = Statut::find($tournois->idStatut);
+        $tours = Tour::all();
+        if (count($tours->where('idTournois',$tournois->id))){
+            $generate=true;
+
+        }else{
+            $generate=false;
+        }
+
+        if($tournois) {
+            return view('tournois/show')->with('data', [
+                'tournois' =>$tournois,
+                'statut' => $statut,
+                'generate' => $generate,
+            ]);
+        } else {
+            abort(404, 'tournoi non trouvé !');
+        }
     }
 
     public function createPlayer(int $id_tournois){
@@ -101,7 +131,6 @@ class TournoisController extends Controller
             $tournoi->joueur()->attach($idPlayer);
             $tournoi->save();
         }
-        
        return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
     }
 
@@ -207,5 +236,23 @@ class TournoisController extends Controller
             //ici on va créer les matchs         
             return redirect("tournois/$id_tournois");
         }
+        /*if($nombre_tours==0 || 2^$nombre_tours==$joueurs){
+            return redirect("tournois/$id_tournois")->with('errorMsg', "Le tournois n'a pas pu être créé, le nombre de joueur doit être une puissance de 2");
+        }else{
+
+            for($i=0;$i<$nombre_tours;$i++){
+                $tour = Tour::create([
+                    'numeroDuTour' => $i+1,
+                    'idStatut' => 2,
+                    'idTournois' => $id_tournois,
+                ]);
+                $tour->save();
+            }
+            return redirect("tournois/$id_tournois")->with('successMsg', 'Tours créés avec succès !');
+        }*/
+        
+        //ici on va créer les matchs
+        //$tours = Tour::where('idTournois', $id_tournois);
+
     }
 }
