@@ -169,24 +169,20 @@ class TournoisController extends Controller
      */
     public function generateTournament($id_tournois){
         $tournoi = Tournois::find($id_tournois);
-        $joueurs = Joueur::find($tournoi->joueur);
+        $joueurs = count($tournoi->joueur);
 
         //ici on va créer les tours
-        $nombre_tours=log(count($joueurs),2);
+        $nombre_tours=intval(log($joueurs)/log(2));
         $nb_joueurs = count($tournoi->joueur);
-        for($i=0;$i<=$nombre_tours;$i++){
+        for($i=0;$i<$nombre_tours;$i++){
             $tours = Tour::where('idTournois', $id_tournois)->get();
-            $enough_player = ((($nb_joueurs-1) & $nb_joueurs)==0 && $nb_joueurs!=0);
-            $nb_tours_dispo = $nombre_tours - count($tours);
-            if($enough_player && $nb_tours_dispo>0) {
-                
-                $tour = Tour::create([
-                    'numeroDuTour' => $i+1,
-                    'idStatut' => 4,
-                    'idTournois' => $id_tournois,
-                ]);
-                $tour->save();
-            }
+            $tour = Tour::create([
+                'numeroDuTour' => $i+1,
+                'idStatut' => 4,
+                'idTournois' => $id_tournois,
+            ]);
+            $tour->save();
+            
         }
         return redirect("tournois/$id_tournois");
         //ici on va créer les matchs
