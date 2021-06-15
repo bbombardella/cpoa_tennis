@@ -24,6 +24,7 @@ class MatchController extends Controller
 
     public function show($id_tour, $id_match) {
         $match = Match::find($id_match);
+        $resultat = ResultatMatch::find($id_match);
         return $matchs;
     }
 
@@ -54,5 +55,28 @@ class MatchController extends Controller
             'idStatut' => $id_statut,
         ]);
         $match->save();
+    }
+    
+    public function saisieResultat($id_tour, $id_match) {
+
+    }
+
+    public function enregistrementResultat(Request $request, $id_tour, $id_match) {
+        $request->validate([
+            'gagnant' => 'required|string|int',
+            'score1' => 'required|string|int',
+            'score2' => 'required|string|int'
+        ]);
+
+        $tournoi = Tournois::find($id_tournois);
+        $joueur = Joueur::all();
+        foreach($request->joueur as $idPlayer) {
+            $tournoi->joueur()->attach($idPlayer);
+            $tournoi->save();
+        }
+    }
+
+    public function delete($id_tour, $id_match) {
+        $match = Match::remove($id_match);
     }
 }

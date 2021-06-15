@@ -252,12 +252,12 @@ class TournoisController extends Controller
             $matchs = Match::where('idTour',$tour_1->id)->get();
             $joueurs=$tournoi->joueur;
             foreach($matchs as $match){
-                $match->joueur1()->associate($joueurs->random());
+                $match->joueur_un()->associate($joueurs->random());
                 $match->save();
-                $joueurs=$joueurs->diff([Joueur::find($match->joueur1)]);
-                $match->joueur2()->associate($joueurs->random());
+                $joueurs=$joueurs->diff([$match->joueur_un]);
+                $match->joueur_deux()->associate($joueurs->random());
                 $match->save();
-                $joueurs=$joueurs->diff([Joueur::find($match->joueur2)]);                
+                $joueurs=$joueurs->diff([$match->joueur_deux]);                
             }
             return redirect("tournois/$id_tournois")->with('successMsg', 'Tours créés avec succès !');
         }

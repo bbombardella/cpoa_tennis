@@ -33,4 +33,8 @@ class Match extends Model
     public function joueur_deux() {
         return $this->belongsTo(Joueur::class, 'joueur2');
     }
+
+    public function resultat() {
+        return $this->belongsTo(ResultatMatch::class, 'id', 'idMatch');
+    }
 }
