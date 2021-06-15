@@ -222,10 +222,10 @@ class TournoisController extends Controller
         }else{
             if($nombre_tours-count($test)!=0){
                 for($i=0;$i<$nombre_tours;$i++){    
-                    $tours = Tour::where('idTournois', $id_tournois)->get();
+                    $id_statut = (Statut::where('nom', 'En attente')->first())->id;
                     $tour = Tour::create([
                         'numeroDuTour' => $i+1,
-                        'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                        'idStatut' => $id_statut,
                         'idTournois' => $id_tournois,
                     ]);
                     $tour->save();
@@ -236,13 +236,13 @@ class TournoisController extends Controller
                             $match = Match::create([
                                 'numeroDeMatch'=> $i+1,
                                 'idTour' => $tour->id,
-                                'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                                'idStatut' => $id_statut,
                             ]);
                         }else{
                             $match = Match::create([
                                 'numeroDeMatch'=> $i+1,
                                 'idTour' => $tour->id,
-                                'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                                'idStatut' => $id_statut,
                             ]);
                         }
                     
