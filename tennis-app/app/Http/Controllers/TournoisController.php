@@ -96,8 +96,18 @@ class TournoisController extends Controller
     public function createPlayer(int $id_tournois){
         $tournois = Tournois::find($id_tournois);
         $player = Joueur::all();
-        $statuts = Statut::all();
+        //$statuts = Statut::all();
         $joueur_tournoi = $tournois->joueur;
+
+        $statut = Statut::find($tournois->idStatut);
+        $tours = Tour::all();
+        if (count($tours->where('idTournois',$tournois->id))){
+            $generate=true;
+
+        }else{
+            $generate=false;
+        }
+
         if(count($joueur_tournoi)>0)
         {
             $player=$player->diff($joueur_tournoi);
@@ -105,8 +115,11 @@ class TournoisController extends Controller
         return view('tournois/modalAddPlayer') ->with('data', [
             'tournois' => $tournois,
             'joueurs' => $player,
-            'statuts' => $statuts,
+            //'statuts' => $statuts,
             'joueur_tournoi' => $joueur_tournoi,
+            'statut' => $statut,
+            'generate' => $generate,
+
         ]);
     }
 
@@ -204,57 +217,42 @@ class TournoisController extends Controller
         //ici on va créer les tours
         $nombre_tours=intval(log($joueurs)/log(2));
         $test=Tour::where('idTournois',$id_tournois)->get();
-        if($nombre_tours-count($test)!=0){
-            for($i=0;$i<$nombre_tours;$i++){    
-                $tours = Tour::where('idTournois', $id_tournois)->get();
-                $tour = Tour::create([
-                    'numeroDuTour' => $i+1,
-                    'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
-                    'idTournois' => $id_tournois,
-                ]);
-                $tour->save();
-                $num_tour=$tour->numeroDuTour;
-                $nb_joueurs=$joueurs/(pow(2,($num_tour-1)));
-                for($j=0;$j<$nb_joueurs/2;$j++){
-                    $match = Match::create([
-                        'numeroDeMatch'=> $i+1,
-                        'idTour' => $tour->id,
-                        'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
-                    ]);                
-                }
-            }
-        }
-        $tour_1= Tour::where('numeroDuTour',1)->where('idTournois',$id_tournois);
-        $matchs = Match::where('idTour',$tour_1);
-        $joueurs=$tournoi->joueur;
-        foreach($matchs as $match){
-            $match->joueur1 = $joueurs->inRandomOrder()->first()->get()->id;
-            $match->save();
-            $joueurs=$joueurs->diff($joueurs->first());
-            $match->joueur2 = $joueurs->inRandomOrder()->first()->get()->id;
-            $match->save();
-            $joueurs=$joueurs->diff($joueurs->first());
-            
-        }
-            //ici on va créer les matchs         
-        return redirect("tournois/$id_tournois");
-        /*if($nombre_tours==0 || 2^$nombre_tours==$joueurs){
+        if($nombre_tours==0 || 2**$nombre_tours!=$joueurs){
             return redirect("tournois/$id_tournois")->with('errorMsg', "Le tournois n'a pas pu être créé, le nombre de joueur doit être une puissance de 2");
         }else{
-
-            for($i=0;$i<$nombre_tours;$i++){
-                $tour = Tour::create([
-                    'numeroDuTour' => $i+1,
-                    'idStatut' => 2,
-                    'idTournois' => $id_tournois,
-                ]);
-                $tour->save();
+            if($nombre_tours-count($test)!=0){
+                for($i=0;$i<$nombre_tours;$i++){    
+                    $tours = Tour::where('idTournois', $id_tournois)->get();
+                    $tour = Tour::create([
+                        'numeroDuTour' => $i+1,
+                        'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                        'idTournois' => $id_tournois,
+                    ]);
+                    $tour->save();
+                    $num_tour=$tour->numeroDuTour;
+                    $nb_joueurs=$joueurs/(pow(2,($num_tour-1)));
+                    for($j=0;$j<$nb_joueurs/2;$j++){
+                        $match = Match::create([
+                            'numeroDeMatch'=> $i+1,
+                            'idTour' => $tour->id,
+                            'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                        ]);                
+                    }
+                }
             }
+            $tour_1= Tour::where('numeroDuTour',1)->where('idTournois',$id_tournois);
+            $matchs = Match::where('idTour',$tour_1);
+            $joueurs=$tournoi->joueur;
+            foreach($matchs as $match){
+                $match->joueur1 = $joueurs->inRandomOrder()->first()->get()->id;
+                $match->save();
+                $joueurs=$joueurs->diff($joueurs->first());
+                $match->joueur2 = $joueurs->inRandomOrder()->first()->get()->id;
+                $match->save();
+                $joueurs=$joueurs->diff($joueurs->first());
+                
+            }            
             return redirect("tournois/$id_tournois")->with('successMsg', 'Tours créés avec succès !');
-        }*/
-        
-        //ici on va créer les matchs
-        //$tours = Tour::where('idTournois', $id_tournois);
-
+        }
     }
 }
