@@ -18,12 +18,14 @@ class Match extends Migration
             $table->unsignedBigInteger('numeroDeMatch');
             $table->unsignedBigInteger('idStatut');
             $table->unsignedBigInteger('idTour');
-            $table->foreign('idStatut')->references('id')->on('statut');
-            $table->foreign('idTour')->references('id')->on('tour');
             $table->unsignedBigInteger('joueur1');
             $table->unsignedBigInteger('joueur2');
-            $table->foreign('joueur1')->references('id')->on('joueur');
-            $table->foreign('joueur2')->references('id')->on('joueur');
+            $table->unsignedBigInteger('gagnant');
+            $table->foreign('idStatut')->references('id')->on('statut');
+            $table->foreign('idTour')->references('id')->on('tour');
+            $table->foreign('joueur1')->nullable()->references('id')->on('joueur');
+            $table->foreign('joueur2')->nullable()->references('id')->on('joueur');
+            $table->foreign('gagnant')->nullable()->references('id')->on('joueur');
         });
     }
 
