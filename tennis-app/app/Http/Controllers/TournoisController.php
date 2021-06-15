@@ -73,30 +73,19 @@ class TournoisController extends Controller
     public function arbre($id){
         $tournois = Tournois::find($id);
         $statut = Statut::find($tournois->idStatut);
-        $singleElimination = [
-            $teams = [              // Matchups
-              ["Team 1", "Team 2"], // First match
-              ["Team 3", "Team 4"]  // Second match
-            ],
-            $results = [            // List of brackets (single elimination, so only one bracket)
-              [                     // List of rounds in bracket
-                [                   // First round in this bracket
-                  [1, 2],           // Team 1 vs Team 2
-                  [3, 4]            // Team 3 vs Team 4
-                ],
-                [                   // Second (final) round in single elimination bracket
-                  [5, 6],           // Match for first place
-                  [7, 8]            // Match for 3rd place
-                ]
-              ]
-            ]
-                ];
+        $tours = Tour::all();
+        if (count($tours->where('idTournois',$tournois->id))){
+            $generate=true;
+
+        }else{
+            $generate=false;
+        }
+
         if($tournois) {
-            return view('tournois/modalArbre')->with('data', [
+            return view('tournois/show')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
-                'generate' => true,
-                'affichage'=>$singleElimination,
+                'generate' => $generate,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
