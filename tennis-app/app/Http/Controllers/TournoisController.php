@@ -37,11 +37,19 @@ class TournoisController extends Controller
     public function show($id) {
         $tournois = Tournois::find($id);
         $statut = Statut::find($tournois->idStatut);
+        $tours = Tour::all();
+        if (count($tours->where('idTournois',$tournois->id))){
+            $generate=true;
+
+        }else{
+            $generate=false;
+        }
+
         if($tournois) {
             return view('tournois/show')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
-                'generate' => true,
+                'generate' => $generate,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
@@ -100,7 +108,6 @@ class TournoisController extends Controller
             $tournoi->joueur()->attach($idPlayer);
             $tournoi->save();
         }
-        
        return redirect("/tournois/$id_tournois/joueurs/associate")->with('successMsg', 'Joueurs ajouté.e.s avec succès !');
     }
 
@@ -178,13 +185,18 @@ class TournoisController extends Controller
             $tours = Tour::where('idTournois', $id_tournois)->get();
             $tour = Tour::create([
                 'numeroDuTour' => $i+1,
-                'idStatut' => 4,
+                'idStatut' => 2,
                 'idTournois' => $id_tournois,
             ]);
             $tour->save();
             
         }
-        return redirect("tournois/$id_tournois");
+        if($nombre_tours==0){
+            return redirect("tournois/$id_tournois")->with('errorMsg', "Le tournois n'a pas pu être créé, veuillez rajouter des joueurs ");
+        }else{
+            return redirect("tournois/$id_tournois")->with('successMsg', 'Tours créés avec succès !');
+        }
+        
         //ici on va créer les matchs
         //$tours = Tour::where('idTournois', $id_tournois);
 

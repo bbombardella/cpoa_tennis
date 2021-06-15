@@ -21,6 +21,17 @@
         </div>
     @endif
 
+    @if (session('errorMsg'))
+        <div class="m-3" role="alert">
+            <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                Erreur
+            </div>
+            <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                <p>{{ session('errorMsg') }}</p>
+            </div>
+        </div>
+    @endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -46,20 +57,15 @@
                             Voir les tours
                         </x-button> 
                     </a> 
-                    <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/generate") }}''>
-                        <x-button name="createJoueur" class="createJoueur mt-5" type="button">
-                            Generation    
-                        </x-button> 
-                    </a> 
 
                     @if (!$data['generate'])
-                        <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/tour") }}''>
+                        <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/generate") }}''>
                             <x-button name="createJoueur" class="createJoueur mt-5" type="button">
                                 Générer tournoi
                             </x-button> 
                         </a> 
                     @else 
-                        <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/tour") }}''>
+                        <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/arbre") }}''>
                             <x-button name="createJoueur" class="createJoueur mt-5" type="button">
                                 Afficher l'arbre
                             </x-button> 
