@@ -95,8 +95,18 @@ class TournoisController extends Controller
     public function createPlayer(int $id_tournois){
         $tournois = Tournois::find($id_tournois);
         $player = Joueur::all();
-        $statuts = Statut::all();
+        //$statuts = Statut::all();
         $joueur_tournoi = $tournois->joueur;
+
+        $statut = Statut::find($tournois->idStatut);
+        $tours = Tour::all();
+        if (count($tours->where('idTournois',$tournois->id))){
+            $generate=true;
+
+        }else{
+            $generate=false;
+        }
+
         if(count($joueur_tournoi)>0)
         {
             $player=$player->diff($joueur_tournoi);
@@ -104,8 +114,11 @@ class TournoisController extends Controller
         return view('tournois/modalAddPlayer') ->with('data', [
             'tournois' => $tournois,
             'joueurs' => $player,
-            'statuts' => $statuts,
+            //'statuts' => $statuts,
             'joueur_tournoi' => $joueur_tournoi,
+            'statut' => $statut,
+            'generate' => $generate,
+
         ]);
     }
 
