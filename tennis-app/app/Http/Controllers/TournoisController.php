@@ -82,7 +82,7 @@ class TournoisController extends Controller
         }
 
         if($tournois) {
-            return view('tournois/show')->with('data', [
+            return view('tournois/modalArbre')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
                 'generate' => $generate,
