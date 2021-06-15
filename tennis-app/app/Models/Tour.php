@@ -26,4 +26,8 @@ class Tour extends Model
     public function tournois() {
         return $this->hasOne(Tournois::class, 'id', 'idTournois');
     }
+
+    public function matchs() {
+        return $this->hasMany(Match::class, 'idTour');
+    }
 }

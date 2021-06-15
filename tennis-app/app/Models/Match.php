@@ -23,14 +23,14 @@ class Match extends Model
     }
 
     public function tour(){
-        return $this->hasOne(Tour::class, 'idTour');
+        return $this->belongsTo(Tour::class, 'idTour');
     }
 
-    public function joueur1() {
+    public function joueur_un() {
         return $this->belongsTo(Joueur::class, 'joueur1');
     }
 
-    public function joueur2() {
+    public function joueur_deux() {
         return $this->belongsTo(Joueur::class, 'joueur2');
     }
 }
