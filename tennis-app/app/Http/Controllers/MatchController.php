@@ -27,7 +27,6 @@ class MatchController extends Controller
 
     public function enregistrementResultat(Request $request, $id_tour, $id_match) {
         $request->validate([
-            'score1' => 'required|string|int',
             'gagnant' => 'required|string|int',
             'score1' => 'required|string|int',
             'score2' => 'required|string|int'

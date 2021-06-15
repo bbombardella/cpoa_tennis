@@ -19,11 +19,11 @@ class ResultatMatch extends Model
         'perdant'
     ];
 
-    public function gagnant() {
+    public function joueur_gagnant() {
         return $this->hasOne(Joueur::class, 'gagnant');
     }
 
-    public function perdant() {
+    public function joueur_perdant() {
         return $this->hasOne(Joueur::class, 'perdant');
     }
 }

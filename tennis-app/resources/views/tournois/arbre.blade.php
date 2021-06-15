@@ -50,7 +50,15 @@
                                 @if($match->joueur_un==NULL)
 									{"name" : " ", "id" : " ", "score" : " " }, {"name" : " ", "id" : " ", "score" : " "}
 								@else
-								{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " " }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " "}
+									@if($match->resultat==NULL)
+									{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " " }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " "}
+									@else
+										@if($match->resultat->gagnant==$match->joueur_un->id)
+										{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_gagnant}}" }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_perdant}}"}
+										@else
+										{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_perdant}}" }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_gagnant}}"}
+										@endif
+									@endif
 								@endif
                             ],
                         @endforeach
