@@ -40,17 +40,17 @@ class TournoisController extends Controller
         $statut = Statut::find($tournois->idStatut);
         $tours = Tour::all();
         if (count($tours->where('idTournois',$tournois->id))){
-            $generate=true;
+            $generate=false;
 
         }else{
             $generate=false;
         }
-
         if($tournois) {
             return view('tournois/show')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
                 'generate' => $generate,
+                'tour' => $tours,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
@@ -81,12 +81,19 @@ class TournoisController extends Controller
         }else{
             $generate=false;
         }
-
+        $toursselect=$tours->where('idTournois',$tournois->id);
+        $matchs = Match::all();
+        $matchselect=[];
+        foreach ($toursselect as $tours){
+            array_push($matchselect,$matchs->where('idTour', $tours->id));
+        }
         if($tournois) {
             return view('tournois/modalArbre')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
                 'generate' => $generate,
+                'tour' => $toursselect,
+                'match' => $matchs,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
@@ -232,24 +239,25 @@ class TournoisController extends Controller
                     $num_tour=$tour->numeroDuTour;
                     $nb_joueurs=$joueurs/(pow(2,($num_tour-1)));
                     for($j=0;$j<$nb_joueurs/2;$j++){
-                        if($num_tour==1){
-                            $match = Match::create([
-                                'numeroDeMatch'=> $i+1,
-                                'idTour' => $tour->id,
-                                'idStatut' => $id_statut,
-                            ]);
-                        }else{
-                            $match = Match::create([
-                                'numeroDeMatch'=> $i+1,
-                                'idTour' => $tour->id,
-                                'idStatut' => $id_statut,
-                            ]);
-                        }
-                    
-                    }//for
-                }//for
-            }//if
-            //ici on va créer les matchs         
+                        $match = Match::create([
+                            'numeroDeMatch'=> $i+1,
+                            'idTour' => $tour->id,
+                            'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                        ]);                
+                    }
+                }
+            }
+            $tour_1= Tour::where('numeroDuTour',1)
+                ->where('idTournois',$id_tournois);
+            $matchs = Match::where('idTour',$tour_1);
+            $joueurs=$tournoi->joueur;
+            foreach($matchs as $match){
+                $match->joueur1 = $joueurs->random();
+                $joueurs=$joueurs->diff($match->joueur1);
+                $match->joueur2 = $joueurs->random();
+                $match->save();
+                $joueurs=$joueurs->diff($match->joueur2);                
+            }            
             return redirect("tournois/$id_tournois")->with('successMsg', 'Tours créés avec succès !');
         }
     }

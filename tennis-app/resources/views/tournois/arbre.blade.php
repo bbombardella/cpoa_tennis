@@ -35,24 +35,21 @@
 	<script type="text/javascript">
         console.log('Hello');
 
-
-
 		(function(win, doc, $){
 			
 			console.warn("Make sure the min-width of the .gracket_h3 element is set to width of the largest name/player. Gracket needs to build its canvas based on the width of the largest element. We do this my giving it a min width. I'd like to change that!");
 
 			// Fake Data
 			win.TestData = [
-				[
-					[ {"name" : "Erik Zettersten", "id" : "erik-zettersten", "score" : 47 }, {"name" : "Andrew Miller", "id" : "andrew-miller", "score" : 28} ],
-					[ {"name" : "James Coutry", "id" : "james-coutry", "score" : 21}, {"name" : "Sam Merrill", "id" : "sam-merrill", "score" : 12}],
-				], 
-				[
-					[ {"name" : "Erik Zettersten", "id" : "erik-zettersten", "score" : 23}, {"name" : "Sam Merrill", "id" : "sam-merrill", "score" : 15} ],
-				],
-				[
-					[ {"name" : "Erik Zettersten", "id" : "erik-zettersten"} ]
-				]
+                @foreach ($data['tour'] as $tour)
+                    [
+                        @foreach ($data['match'] as $matchs)
+                            [
+                                {"name" : "{{$tour->id}}", "id" : "{{$tour->id}}", "score" : 2},
+                            ],
+                        @endforeach
+                    ],
+                @endforeach
 			];
 
 			// initializer
