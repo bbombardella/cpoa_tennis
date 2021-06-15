@@ -213,20 +213,18 @@ class TournoisController extends Controller
 
         //ici on va créer les tours
         $nombre_tours=intval(log($joueurs)/log(2));
-        $nb_joueurs = count($tournoi->joueur);
-        for($i=0;$i<$nombre_tours;$i++){
-            $tours = Tour::where('idTournois', $id_tournois)->get();
-            $tour = Tour::create([
-                'numeroDuTour' => $i+1,
-                'idStatut' => 2,
-                'idTournois' => $id_tournois,
-            ]);
-            $tour->save();
-            
-        }
-        if($nombre_tours==0){
-            return redirect("tournois/$id_tournois")->with('errorMsg', "Le tournois n'a pas pu être créé, veuillez rajouter des joueurs ");
+        if($nombre_tours==0 || 2^$nombre_tours==$joueurs){
+            return redirect("tournois/$id_tournois")->with('errorMsg', "Le tournois n'a pas pu être créé, le nombre de joueur doit être une puissance de 2");
         }else{
+
+            for($i=0;$i<$nombre_tours;$i++){
+                $tour = Tour::create([
+                    'numeroDuTour' => $i+1,
+                    'idStatut' => 2,
+                    'idTournois' => $id_tournois,
+                ]);
+                $tour->save();
+            }
             return redirect("tournois/$id_tournois")->with('successMsg', 'Tours créés avec succès !');
         }
         
