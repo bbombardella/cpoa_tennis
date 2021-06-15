@@ -45,12 +45,12 @@ class TournoisController extends Controller
         }else{
             $generate=false;
         }
-
         if($tournois) {
             return view('tournois/show')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
                 'generate' => $generate,
+                'tour' => $tours,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
@@ -81,12 +81,19 @@ class TournoisController extends Controller
         }else{
             $generate=false;
         }
-
+        $toursselect=$tours->where('idTournois',$tournois->id);
+        $matchs = Match::all();
+        $matchselect=[];
+        foreach ($toursselect as $tours){
+            array_push($matchselect,$matchs->where('idTour', $tours->id));
+        }
         if($tournois) {
             return view('tournois/modalArbre')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
                 'generate' => $generate,
+                'tour' => $toursselect,
+                'match' => $matchs,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
