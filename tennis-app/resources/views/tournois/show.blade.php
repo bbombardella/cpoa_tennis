@@ -59,7 +59,12 @@
                             <x-button name="createJoueur" class="createJoueur mt-5" type="button">
                                 Générer tournoi
                             </x-button> 
-                        </a> 
+                        </a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['tournois']->id.'/joueurs/associate') }}">
+                            <x-button name="createTournoi" class="createTournoi mt-5" type="button">
+                                Modifier les participants
+                            </x-button> 
+                        </a>  
                         @endrole
                     @else 
                         <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/arbre") }}''>
@@ -77,11 +82,7 @@
                             Changer le statut
                         </x-button> 
                     </a> 
-                    <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['tournois']->id.'/joueurs/associate') }}">
-                        <x-button name="createTournoi" class="createTournoi mt-5" type="button">
-                            Modifier les participants
-                        </x-button> 
-                    </a> 
+                    
                     @endrole
                 </div>
                 @include('tournois/retour')
