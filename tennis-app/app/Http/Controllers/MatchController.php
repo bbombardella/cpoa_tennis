@@ -78,23 +78,51 @@ class MatchController extends Controller
         $match->save();
     }
     
-    public function saisieResultat($id_tour, $id_match) {
-
+    public function saisieResultat($id_tournois, $id_tour, $id_match) {
+        $match = Match::find($id_match);
+        $tournoi = Tournois::find($id_tournois);
+        $tour = Tour::find($id_tour);
+        $matchs = Match::where('idTour', $id_tour)->get();
+        return view('match/modalResultat')->with('data', [
+            'id_tournois' => $id_tournois,
+            'id_tour' => $id_tour,
+            'id_match' => $id_match,
+            'tour' => $tour,
+            'matchs' => $matchs,
+            'match' => $match,
+        ]);
     }
 
-    public function enregistrementResultat(Request $request, $id_tour, $id_match) {
-        $request->validate([
-            'gagnant' => 'required|string|int',
+    public function enregistrementResultat(Request $request, $id_tournois, $id_tour, $id_match) {
+        /*$request->validate([
             'score1' => 'required|string|int',
             'score2' => 'required|string|int'
-        ]);
+        ]);*/
 
-        $tournoi = Tournois::find($id_tournois);
-        $joueur = Joueur::all();
-        foreach($request->joueur as $idPlayer) {
-            $tournoi->joueur()->attach($idPlayer);
-            $tournoi->save();
+        $match = Match::find($id_match);
+
+        //si joueur 1 est gagnant
+        if($request->score1 > $request->score2) {
+            $resultat = ResultatMatch::create([
+                'idMatch' => $id_match,
+                'gagnant' => $match->joueur_un->id,
+                'perdant' => $match->joueur_deux->id,
+                'score_gagnant' => $request->score1,
+                'score_perdant' => $request->score2
+            ]);
+        } else {
+            $resultat = ResultatMatch::create([
+                'idMatch' => $id_match,
+                'gagnant' => $match->joueur_deux->id,
+                'perdant' => $match->joueur_un->id,
+                'score_gagnant' => $request->score2,
+                'score_perdant' => $request->score1
+            ]);
         }
+        
+        $resultat->save();
+
+        return redirect("tournois/$id_tournois/tour/$id_tour/match")->with('successMsg', 'Résultats saisies avec succès !');
     }
 
     public function delete($id_tour, $id_match) {

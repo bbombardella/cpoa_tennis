@@ -58,6 +58,9 @@ Route::get('/tournois/{id}', [TournoisController::class, 'show']);
 Route::get('/tournois/{id}/arbre',[TournoisController::class, 'arbre']);
 
 
+Route::get('/tournois/{id_tournois}/tour/{id_tour}/match/{id_match}/resultat', [MatchController::class, 'saisieResultat']);
+Route::post('/tournois/{id_tournois}/tour/{id_tour}/match/{id_match}/resultat', [MatchController::class, 'enregistrementResultat']);
+
 Route::get('/tournois/{id_tournois}/tour/{id_tour}/match', [MatchController::class, 'index']);
 Route::get('/tournois/{id_tournois}/tour/{id_tour}/match/create', [MatchController::class, 'create']);
 Route::post('/tournois/{id_tournois}/tour/{id_tour}/match/create', [MatchController::class, 'store']);
