@@ -47,9 +47,9 @@ class TourController extends Controller
         $nb_tours = ($nb_joueurs)/2;
         $nb_tours_dispo = $nb_tours - count($tours);
         if($enough_player && $nb_tours_dispo>0) {
-            $request->validate([
+            /*$request->validate([
                 'idStatut' => 'required|int'
-            ]);
+            ]);*/
 
             $tour = Tour::create([
                 'numeroDuTour' => count($tours)+1,

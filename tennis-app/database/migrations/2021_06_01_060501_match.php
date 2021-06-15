@@ -20,6 +20,10 @@ class Match extends Migration
             $table->unsignedBigInteger('idTour');
             $table->foreign('idStatut')->references('id')->on('statut');
             $table->foreign('idTour')->references('id')->on('tour');
+            $table->unsignedBigInteger('joueur1');
+            $table->unsignedBigInteger('joueur2');
+            $table->foreign('joueur1')->references('id')->on('joueur');
+            $table->foreign('joueur2')->references('id')->on('joueur');
         });
     }
 

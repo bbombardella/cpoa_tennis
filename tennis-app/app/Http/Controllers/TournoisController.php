@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\Tournois;
 use App\Models\Statut;
 use App\Models\Joueur;
+use App\Models\Tour;
 
 use function App\Models\statut;
 
@@ -160,5 +161,35 @@ class TournoisController extends Controller
         $tournoi->save();
 
         return redirect("/tournois/$id_tournois");
+    }
+
+    /**
+     * Generate a tournament
+     */
+    public function generateTournament($id_tournois){
+        $tournoi = Tournois::find($id_tournois);
+        $joueurs = Joueur::find($tournoi->joueur);
+
+        //ici on va créer les tours
+        $nombre_tours=log(count($joueurs),2);
+        $nb_joueurs = count($tournoi->joueur);
+        for($i=0;$i<=$nombre_tours;$i++){
+            $tours = Tour::where('idTournois', $id_tournois)->get();
+            $enough_player = ((($nb_joueurs-1) & $nb_joueurs)==0 && $nb_joueurs!=0);
+            $nb_tours_dispo = $nombre_tours - count($tours);
+            if($enough_player && $nb_tours_dispo>0) {
+                
+                $tour = Tour::create([
+                    'numeroDuTour' => $i+1,
+                    'idStatut' => 4,
+                    'idTournois' => $id_tournois,
+                ]);
+                $tour->save();
+            }
+        }
+        return redirect("tournois/$id_tournois");
+        //ici on va créer les matchs
+        //$tours = Tour::where('idTournois', $id_tournois);
+
     }
 }

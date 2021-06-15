@@ -41,6 +41,11 @@
                             Voir les tours
                         </x-button> 
                     </a> 
+                    <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/generate") }}''>
+                        <x-button name="createJoueur" class="createJoueur mt-5" type="button">
+                            Generation    
+                        </x-button> 
+                    </a> 
                     @role('Organisateur')
                     <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/changeState") }}''>
                         <x-button name="changeTournoisState" class="changeTournoisState mt-5" type="button">

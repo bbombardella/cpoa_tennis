@@ -14,7 +14,9 @@ class Match extends Model
     protected $table = 'match';
     protected $primaryKey = 'id';
     protected $fillable = [
-            'numeroDeMatch'
+            'numeroDeMatch',
+            'joueur1',
+            'joueur2',
         ];
 
     public function statut(){
