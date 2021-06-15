@@ -1,8 +1,3 @@
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="dist/jquery.bracket.min.js"></script>
-
-<link href="dist/jquery.bracket.min.css" rel="stylesheet">
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -49,7 +44,7 @@
                             </x-button> 
                         </a> 
                     @else 
-                        <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/tour") }}''>
+                        <a class="waves-effect waves-light btn modal-trigger" href='{{ url("/tournois/".$data['tournois']->id."/arbre") }}''>
                             <x-button name="createJoueur" class="createJoueur mt-5" type="button">
                                 Afficher l'arbre
                             </x-button> 
