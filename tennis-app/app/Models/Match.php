@@ -14,9 +14,6 @@ class Match extends Model
     protected $primaryKey = 'id';
     protected $fillable = [
             'numeroDeMatch',
-            'joueur1',
-            'joueur2',
-            'gagnant',
             'idStatut',
             'idTour',
         ];
@@ -30,14 +27,10 @@ class Match extends Model
     }
 
     public function joueur1() {
-        return $this->hasOne(Joueur::class, 'joueur1');
+        return $this->belongsTo(Joueur::class, 'joueur1');
     }
 
     public function joueur2() {
-        return $this->hasOne(Joueur::class, 'joueur2');
-    }
-
-    public function gagnant() {
-        return $this->hasOne(Joueur::class, 'gagnant');
+        return $this->belongsTo(Joueur::class, 'joueur2');
     }
 }

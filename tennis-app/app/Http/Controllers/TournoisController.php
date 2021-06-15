@@ -240,24 +240,25 @@ class TournoisController extends Controller
                     $nb_joueurs=$joueurs/(pow(2,($num_tour-1)));
                     for($j=0;$j<$nb_joueurs/2;$j++){
                         $match = Match::create([
-                            'numeroDeMatch'=> $i+1,
+                            'numeroDeMatch'=> $j+1,
                             'idTour' => $tour->id,
-                            'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
-                        ]);                
+                            'idStatut' => $id_statut
+                        ]); 
+                        $match->save();               
                     }
                 }
             }
-            $tour_1= Tour::where('numeroDuTour',1)
-                ->where('idTournois',$id_tournois);
-            $matchs = Match::where('idTour',$tour_1);
+            $tour_1= Tour::where('numeroDuTour',1)->where('idTournois',$id_tournois)->first();
+            $matchs = Match::where('idTour',$tour_1->id)->get();
             $joueurs=$tournoi->joueur;
             foreach($matchs as $match){
-                $match->joueur1 = $joueurs->random();
-                $joueurs=$joueurs->diff($match->joueur1);
-                $match->joueur2 = $joueurs->random();
+                $match->joueur1()->associate($joueurs->random());
                 $match->save();
-                $joueurs=$joueurs->diff($match->joueur2);                
-            }            
+                $joueurs=$joueurs->diff($match->joueur1());
+                $match->joueur2()->associate($joueurs->random());
+                $match->save();
+                $joueurs=$joueurs->diff($match->joueur2());                
+            }
             return redirect("tournois/$id_tournois")->with('successMsg', 'Tours créés avec succès !');
         }
     }
