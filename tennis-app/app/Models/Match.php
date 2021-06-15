@@ -8,16 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Match extends Model
 {
     use HasFactory;
-    use Tour;
-    use Statut;
 
+    public $timestamps = false;
     protected $table = 'match';
     protected $primaryKey = 'id';
     protected $fillable = [
             'numeroDeMatch',
             'joueur1',
             'joueur2',
-            'gagnant'
+            'gagnant',
+            'idStatut',
+            'idTour',
         ];
 
     public function statut(){
@@ -25,7 +26,7 @@ class Match extends Model
     }
 
     public function tour(){
-        return $this->hasOne(Tour::class, 'idTournois');
+        return $this->hasOne(Tour::class, 'idTour');
     }
 
     public function joueur1() {
