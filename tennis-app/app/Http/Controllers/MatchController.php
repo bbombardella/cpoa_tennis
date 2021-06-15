@@ -19,4 +19,28 @@ class MatchController extends Controller
         $match = Match::find($id_match);
         return $matchs;
     }
+
+    public function create($id_tournois, $id_tour){
+        $tournoi = Tournoi::find($id_tournois);
+        $joueurs = $tournoi->joueur;
+        $tour = Tour::find($id_tour);
+        return view('match/modalCreateMatch')->with('data', [
+            'joueurs' => $joueurs,
+            'tournois' => $tournoi,
+            'tour' => $tour
+        ])
+    }
+
+    public function store(Request $request, $id_tournoi, $id_tour){
+        $tournoi = Tournoi::find($id_tournoi);
+        $nbmatch = count(Tour::where('id', $id_tour)->tournoi->match);
+        var_dump($nbmatch);
+        $id_statut = (Statut::where('nom', 'En attente')->first())->id;
+        $match = Match::create([
+            'numeroDeTour' => $nbmatch+1,
+            'idTour'=> $id_tour,
+            'idStatut' => $id_statut,
+        ]);
+        $match->save();
+    }
 }

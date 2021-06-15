@@ -53,7 +53,6 @@ Route::get('/tournois/{id_tournois}/tour/create', [TourController::class, 'creat
 Route::post('/tournois/{id_tournois}/tour/create', [TourController::class, 'store']);
 Route::get('/tournois/{id_tournois}/tour/{id_tour}/remove', [TourController::class, 'delete']);
 Route::get('/tournois/{id_tournois}/tour/{id_tour}', [TourController::class, 'show']);
-
 Route::get('/tournois/{id}', [TournoisController::class, 'show']);
 
 Route::get('/tournois/{id}/arbre',[TournoisController::class, 'arbre']);

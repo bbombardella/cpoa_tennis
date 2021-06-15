@@ -6,7 +6,7 @@
 
 	<!-- basic styles -->
 	<style type="text/css">
-		.g_gracket { min-width: 700px; background-color: #fff; padding: 55px 15px 5px; line-height: 100%; position: relative; overflow: hidden;}
+		.g_gracket { min-width: 9999px; background-color: #fff; padding: 55px 15px 5px; line-height: 100%; position: relative; overflow: hidden;}
 		.g_round { float: left; margin-right: 70px; }
 		.g_game { position: relative; margin-bottom: 15px; }
 		.g_gracket h3 { margin: 0; padding: 10px 8px 8px; font-size: 18px; font-weight: normal;}

@@ -37,6 +37,18 @@
                         </ul>
                     </div>
                 </div>
+                    <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['tour']->id.'/match') }}">
+                        <x-button name="createMatch" class="createMatch mt-5" type="button">
+                            Créer un match
+                        </x-button> 
+                    </a>
+                @role('Organisateur')
+                    <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['tour']->id.'/match/create') }}">
+                        <x-button name="createMatch" class="createMatch mt-5" type="button">
+                            Créer un match
+                        </x-button> 
+                    </a> 
+                @endrole
                 <div class="m-4 float-right">
                     <x-button type="button" class="waves-effect waves-light btn modal-trigger">
                         <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour') }}'>

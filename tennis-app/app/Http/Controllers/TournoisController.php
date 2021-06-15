@@ -40,7 +40,7 @@ class TournoisController extends Controller
         $statut = Statut::find($tournois->idStatut);
         $tours = Tour::all();
         if (count($tours->where('idTournois',$tournois->id))){
-            $generate=false;
+            $generate=true;
 
         }else{
             $generate=false;
