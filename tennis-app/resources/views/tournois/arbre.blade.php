@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
 
 	<!-- main lib -->
-	<script type="text/javascript" src="../../../app/Dependencies/jquery.gracket.min.js"></script>
+	<script type="text/javascript" src="{{asset('js/jquery.gracket.min.js')}}"></script>
 
 
 </head>
@@ -47,7 +47,11 @@
                     [
                         @foreach ($tour->matchs as $match)
                             [
-                                {"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " " }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " "}
+                                @if($match->joueur_un==NULL)
+									{"name" : " ", "id" : " ", "score" : " " }, {"name" : " ", "id" : " ", "score" : " "}
+								@else
+								{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " " }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " "}
+								@endif
                             ],
                         @endforeach
                     ],
