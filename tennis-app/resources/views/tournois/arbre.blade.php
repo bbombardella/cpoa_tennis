@@ -6,17 +6,17 @@
 
 	<!-- basic styles -->
 	<style type="text/css">
-		.g_gracket { width: 9999px; background-color: #fff; padding: 55px 15px 5px; line-height: 100%; position: relative; overflow: hidden;}
+		.g_gracket { min-width: 700px; background-color: #fff; padding: 55px 15px 5px; line-height: 100%; position: relative; overflow: hidden;}
 		.g_round { float: left; margin-right: 70px; }
 		.g_game { position: relative; margin-bottom: 15px; }
-		.g_gracket h3 { margin: 0; padding: 10px 8px 8px; font-size: 18px; font-weight: normal; color: #fff}
-		.g_team { background: #3597AE; }
-		.g_team:last-child {  background: #FCB821; }
+		.g_gracket h3 { margin: 0; padding: 10px 8px 8px; font-size: 18px; font-weight: normal;}
+		.g_team { background: #FCAF80; }
+		.g_team:last-child {  background: #FCCD80; }
 		.g_round:last-child { margin-right: 20px; }
-		.g_winner { background: #444; }
+		.g_winner { background: #FF6060; }
 		.g_winner .g_team { background: none; }
-		.g_current { cursor: pointer; background: #A0B43C!important; }
-		.g_round_label { top: -5px; font-weight: normal; color: #CCC; text-align: center; font-size: 18px; }
+		.g_current { cursor: pointer; background: #3DBECE!important; }
+		.g_round_label { top: -5px; font-weight: normal; color: white; text-align: center; font-size: 18px;}
 	</style>
 
 	<!-- dependencies -->
@@ -48,7 +48,7 @@
 					[ {"name" : "James Coutry", "id" : "james-coutry", "score" : 21}, {"name" : "Sam Merrill", "id" : "sam-merrill", "score" : 12}],
 				], 
 				[
-					[ {"name" : "Erik Zettersten", "id" : "erik-zettersten", "score" : 23}, {"name" : "James Coutry", "id" : "james-coutry", "score" : 3} ],
+					[ {"name" : "Erik Zettersten", "id" : "erik-zettersten", "score" : 23}, {"name" : "Sam Merrill", "id" : "sam-merrill", "score" : 15} ],
 				],
 				[
 					[ {"name" : "Erik Zettersten", "id" : "erik-zettersten"} ]
