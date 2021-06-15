@@ -14,7 +14,10 @@ class Match extends Model
     protected $table = 'match';
     protected $primaryKey = 'id';
     protected $fillable = [
-            'numeroDeMatch'
+            'numeroDeMatch',
+            'joueur1',
+            'joueur2',
+            'gagnant'
         ];
 
     public function statut(){
@@ -23,5 +26,17 @@ class Match extends Model
 
     public function tour(){
         return $this->hasOne(Tour::class, 'idTournois');
+    }
+
+    public function joueur1() {
+        return $this->hasOne(Joueur::class, 'joueur1');
+    }
+
+    public function joueur2() {
+        return $this->hasOne(Joueur::class, 'joueur2');
+    }
+
+    public function gagnant() {
+        return $this->hasOne(Joueur::class, 'gagnant');
     }
 }
