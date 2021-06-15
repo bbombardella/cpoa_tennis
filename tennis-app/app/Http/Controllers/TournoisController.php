@@ -41,6 +41,7 @@ class TournoisController extends Controller
             return view('tournois/show')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
+                'generate' => true,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
