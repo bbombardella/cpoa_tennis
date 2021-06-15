@@ -1,8 +1,3 @@
-<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-<script src="dist/jquery.bracket.min.js"></script>
-
-<link href="dist/jquery.bracket.min.css" rel="stylesheet">
-
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
