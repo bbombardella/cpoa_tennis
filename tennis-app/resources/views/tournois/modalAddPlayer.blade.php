@@ -49,7 +49,7 @@
                 <form class="w-1/2 m-1" method="POST" id="ajout"
                     action="{{ url('/tournois/' . $data['tournois']->id . '/joueurs/associate') }}">
                     <x-label for="joueur[]" :value="__('Joueur à ajouter')" />
-                    <select multiple="multiple" id="idPlayer" class="block mt-1 mr-3 w-full" type="string"
+                    <select id="idPlayer" class="block mt-1 mr-3 w-full" type="string"
                         name="joueur[]" required autofocus>
                         @foreach ($data['joueurs'] as $joueur)
                             @CRSFs

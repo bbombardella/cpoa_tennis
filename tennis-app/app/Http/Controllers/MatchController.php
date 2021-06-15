@@ -4,14 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Match;
+use App\Models\Tour;
+use App\Models\Tournois;
 
 class MatchController extends Controller
 {
-    public function index($id_tour) {
-        $matchs = Match::with('idTour', $id_tour)->get();
+    public function index($id_tournois, $id_tour) {
+        $tournoi = Tournois::find($id_tournois);
+        $tour = Tour::find($id_tour);
+        $matchs = Match::where('idTour', $id_tour)->get();
+        
         return view('match/list')->with('data', [
+            'id_tournois' => $id_tournois,
             'id_tour' => $id_tour,
-            'matchs' => $matchs
+            'tour' => $tour,
+            'matchs' => $matchs,
         ]);
     }
 
@@ -21,18 +28,23 @@ class MatchController extends Controller
     }
 
     public function create($id_tournois, $id_tour){
-        $tournoi = Tournoi::find($id_tournois);
+        $tournoi = Tournois::find($id_tournois);
         $joueurs = $tournoi->joueur;
         $tour = Tour::find($id_tour);
-        return view('match/modalCreateMatch')->with('data', [
+        $matchs = Match::where('idTour', $id_tour)->get();
+        var_dump($matchs);
+        return view('match/modalCreateMatch') -> with('data', [
             'joueurs' => $joueurs,
             'tournois' => $tournoi,
-            'tour' => $tour
-        ])
+            'id_tournois' => $id_tournois,
+            'id_tour' => $id_tour,
+            'tour' => $tour,
+            'matchs' => $matchs,
+        ]);
     }
 
     public function store(Request $request, $id_tournoi, $id_tour){
-        $tournoi = Tournoi::find($id_tournoi);
+        $tournoi = Tournois::find($id_tournoi);
         $nbmatch = count(Tour::where('id', $id_tour)->tournoi->match);
         var_dump($nbmatch);
         $id_statut = (Statut::where('nom', 'En attente')->first())->id;
