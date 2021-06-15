@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tours') }}
+            {{ __('Matchs') }}
         </h2>
     </x-slot>
 
@@ -21,26 +21,30 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h3 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
-                        Les matchs du tour {{ $data['id_tournois'] }}
+                        Les matchs du tour {{ $data['id_tour'] }}
                     </h3>
                     <div>
                         <ul>
-                            @foreach ($data['tours'] as $tour)
+                        @if($data['matchs']!=null)
+                            @foreach ($data['matchs'] as $match)
                                 <li>
                                     <p>
-                                        <a class="underline" href="{{ url('/joueurs/') }}"></a>
+                                        <a class="underline" href="{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['id_tour'].'/match/'.$match->id) }}">Match {{ $match->numeroDeMatch }}</a>
                                     </p>
                                 </li>
                             @endforeach
+                        @endif
                         </ul>
                     </div>
                 </div>
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/joueurs/create') }}">
-                        <x-button name="createJoueur" class="createJoueur" type="button">
-                            Créer un tour
+                @role('Organisateur')
+                    <a class="waves-effect waves-light btn modal-trigger" href="{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['id_tour'].'/match/create') }}">
+                        <x-button name="createMatch" class="createMatch mt-5" type="button">
+                            Créer un match
                         </x-button> 
-                    </a>  
+                    </a> 
+                @endrole 
                 </div>
             </div>
         </div>
