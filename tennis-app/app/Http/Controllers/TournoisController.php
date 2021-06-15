@@ -40,7 +40,7 @@ class TournoisController extends Controller
         $statut = Statut::find($tournois->idStatut);
         $tours = Tour::all();
         if (count($tours->where('idTournois',$tournois->id))){
-            $generate=true;
+            $generate=false;
 
         }else{
             $generate=false;
@@ -216,26 +216,28 @@ class TournoisController extends Controller
                 $num_tour=$tour->numeroDuTour;
                 $nb_joueurs=$joueurs/(pow(2,($num_tour-1)));
                 for($j=0;$j<$nb_joueurs/2;$j++){
-                    if($num_tour==1){
-                        $match = Match::create([
-                            'numeroDeMatch'=> $i+1,
-                            'idTour' => $tour->id,
-                            'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
-                        ]);
-                    }else{
-                        $match = Match::create([
-                            'numeroDeMatch'=> $i+1,
-                            'idTour' => $tour->id,
-                            'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
-                        ]);
-                    }
-                
+                    $match = Match::create([
+                        'numeroDeMatch'=> $i+1,
+                        'idTour' => $tour->id,
+                        'idStatut' => (Statut::where('nom', 'En attente')->first())->id,
+                    ]);                
                 }
             }
-
-            //ici on va créer les matchs         
-            return redirect("tournois/$id_tournois");
         }
+        $tour_1= Tour::where('numeroDuTour',1)->where('idTournois',$id_tournois);
+        $matchs = Match::where('idTour',$tour_1);
+        $joueurs=$tournoi->joueur;
+        foreach($matchs as $match){
+            $match->joueur1 = $joueurs->inRandomOrder()->first()->get()->id;
+            $match->save();
+            $joueurs=$joueurs->diff($joueurs->first());
+            $match->joueur2 = $joueurs->inRandomOrder()->first()->get()->id;
+            $match->save();
+            $joueurs=$joueurs->diff($joueurs->first());
+            
+        }
+            //ici on va créer les matchs         
+        return redirect("tournois/$id_tournois");
         /*if($nombre_tours==0 || 2^$nombre_tours==$joueurs){
             return redirect("tournois/$id_tournois")->with('errorMsg', "Le tournois n'a pas pu être créé, le nombre de joueur doit être une puissance de 2");
         }else{
