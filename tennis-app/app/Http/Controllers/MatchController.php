@@ -151,7 +151,7 @@ class MatchController extends Controller
 
         $tours = Tour::where('idTournois', $id_tournois)->get();
 
-        if($match->tour->numeroDuTour<size($tours)) {
+        if($match->tour->numeroDuTour<count($tours)) {
             $this->nextMatch($match->numeroDeMatch, Joueur::find($resultat->gagnant), $tours[$match->tour->numeroDuTour]);        
         }
         return redirect("tournois/$id_tournois/arbre")->with('successMsg', 'Résultats saisies avec succès !');
