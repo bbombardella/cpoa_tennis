@@ -153,7 +153,7 @@ class MatchController extends Controller
 
         $this->nextMatch($match->numeroDeMatch, Joueur::find($resultat->gagnant), $tours[$match->tour->numeroDuTour]);        
 
-        return redirect("tournois/$id_tournois/tour/$id_tour/match")->with('successMsg', 'Résultats saisies avec succès !');
+        return redirect("tournois/$id_tournois/arbre")->with('successMsg', 'Résultats saisies avec succès !');
     }
 
     public function nextMatch($numero_match, Joueur $gagnant, Tour $prochain_tour) {
