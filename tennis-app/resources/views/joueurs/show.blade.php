@@ -47,9 +47,6 @@
                                 Défaite: {{ $data['defaite'] }}
                             </li>
                             <li>
-                                Tournois gagné: {{ $data['tournoi_gagne'] }}
-                            </li>
-                            <li>
                                 Nombre d'inscription: {{ $data['nb_tournoi'] }}
                             </li>
                         </ul>
