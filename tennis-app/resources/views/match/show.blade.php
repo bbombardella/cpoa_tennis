@@ -32,21 +32,32 @@
                                 Numéro de tour: {{ $data['match']->numeroDeMatch }}
                             </li>
                             @if(($data['match']->joueur_un)!=null)
-                            <li>
-                                Joueur 1: <a class="underline" href="{{ url('joueurs/'.$data['match']->joueur_un->id) }}">{{ $data['match']->joueur_un->nom }} {{ $data['match']->joueur_un->prenom }}</a>
-                            </li>
-                            <li>
-                                Joueur 2 : <a class="underline" href="{{ url('joueurs/'.$data['match']->joueur_deux->id) }}">{{ $data['match']->joueur_deux->nom }} {{ $data['match']->joueur_deux->prenom }}</a>
-                            </li>
+                                @if ($data['match']->resultat->gagnant==$data['match']->joueur_un->id)
+                                    <li>
+                                        Joueur 1: <a class="underline" href="{{ url('joueurs/'.$data['match']->joueur_un->id) }}">{{ $data['match']->joueur_un->nom }} {{ $data['match']->joueur_un->prenom }}</a> - {{ $data['match']->resultat->score_gagnant }} - <strong>Gagnant</strong>
+                                    </li>
+                                    <li>
+                                        Joueur 2 : <a class="underline" href="{{ url('joueurs/'.$data['match']->joueur_deux->id) }}">{{ $data['match']->joueur_deux->nom }} {{ $data['match']->joueur_deux->prenom }}</a> - {{ $data['match']->resultat->score_perdant }} - <strong>Perdant</strong>
+                                    </li>
+                                @else
+                                    <li>
+                                        Joueur 1: <a class="underline" href="{{ url('joueurs/'.$data['match']->joueur_un->id) }}">{{ $data['match']->joueur_un->nom }} {{ $data['match']->joueur_un->prenom }}</a> - {{ $data['match']->resultat->score_perdant }} - <strong>PErdant</strong>
+                                    </li>
+                                    <li>
+                                        Joueur 2 : <a class="underline" href="{{ url('joueurs/'.$data['match']->joueur_deux->id) }}">{{ $data['match']->joueur_deux->nom }} {{ $data['match']->joueur_deux->prenom }}</a> - {{ $data['match']->resultat->score_gagnant }} - <strong>Gagnant</strong>
+                                    </li>
+                                @endif
                             @endif
                         </ul>
                     </div>
                 </div>
-                <x-button type="button" class="waves-effect waves-light btn modal-trigger">
+                <div class="m-4 float-left">
+                    <x-button type="button" class="waves-effect waves-light btn modal-trigger">
                         <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['id_tour'].'/match') }}'>
                           Gérer les joueurs du match
                         </a>
                     </x-button>
+                </div>
                 <div class="m-4 float-right">
                     <x-button type="button" class="waves-effect waves-light btn modal-trigger">
                         <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour') }}'>
