@@ -7,6 +7,8 @@ use App\Models\Match;
 use App\Models\Tour;
 use App\Models\Tournois;
 use App\Models\ResultatMatch;
+use App\Models\Statut;
+use App\Models\Joueur;
 
 class MatchController extends Controller
 {
@@ -60,13 +62,16 @@ class MatchController extends Controller
         $match = Match::where('idTour', $id_tour)->get();
         $nbmatch = $match->max('numeroDeMatch');
         $id_statut = (Statut::where('nom', 'En attente')->first())->id;
+        $joueur1 = Joueur::find($request->joueur_1);
+        $joueur2 = Joueur::find($request->joueur_2);
         $match = Match::create([
             'numeroDeMatch' => $nbmatch+1,
             'idTour'=> $id_tour,
             'idStatut' => $id_statut,
-            'joueur1' => $request->joueur_1,
-            'joueur2'=> $request->joueur_2,
         ]);
+        dump([$joueur1, $joueur2]);
+        $match->joueur_un()->associate($joueur1);
+        $match->joueur_deux()->associate($joueur2);
         $match->save();
         return redirect('/tournois/'.$id_tournoi.'/tour/'.$id_tour.'/match')->with('succesMsg', 'Match crée avec succès');
     }
