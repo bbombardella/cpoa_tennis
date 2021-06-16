@@ -49,11 +49,11 @@
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
                     <div>
                         <x-label for="score1" value="Score de {{ $data['match']->joueur_un->nom }} {{ $data['match']->joueur_un->prenom }}" />
-                        <x-input id="score1" class="block mt-1 mr-3" type="number" name="score1" value="0" step="1" required autofocus />
+                        <x-input id="score1" class="block mt-1 mr-3" type="number" name="score1" value="0" step="1" min="0" required autofocus />
                     </div>
                     <div>
                         <x-label for="score1" value="Score de {{ $data['match']->joueur_deux->nom }} {{ $data['match']->joueur_deux->prenom }}" />
-                        <x-input id="score1" class="block mt-1 mr-3" type="number" name="score2" value="0" step="1" required autofocus />
+                        <x-input id="score1" class="block mt-1 mr-3" type="number" name="score2" value="0" step="1" min="0" required autofocus />
                     </div>
                 </div>
 

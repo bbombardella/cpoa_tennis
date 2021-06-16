@@ -136,7 +136,7 @@
       build : {
         team : function(data, node){
           var html = [
-            '<h3'+ ((typeof data.score === "undefined") ? "" : " title=\"Score: " + data.score + "\"") +'>',
+            '<a'+((typeof data.url === "undefined") ? "" : " href=\""+data.url+"\"")+'><h3'+ ((typeof data.score === "undefined") ? "" : " title=\"Score: " + data.score + "\"") +'>',
               '<span class="' + node.seedClass + '">',
                 ((typeof data.displaySeed === "undefined") ? data.seed : data.displaySeed),
               '</span>',
@@ -144,7 +144,7 @@
               '<small>',
                 ((typeof data.score === "undefined") ? "" : data.score),
               '</small>',
-            '</h3>'
+            '</h3></a>'
           ].join("");
           return team = $("<div />", {
             "html" : html,

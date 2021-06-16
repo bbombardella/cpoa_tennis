@@ -23,7 +23,7 @@
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.js"></script>
 
 	<!-- main lib -->
-	<script type="text/javascript" src="{{asset('js/jquery.gracket.min.js')}}"></script>
+	<script type="text/javascript" src="{{asset('js/jquery.gracket.js')}}"></script>
 
 
 </head>
@@ -51,12 +51,12 @@
 									{"name" : " ", "id" : " ", "score" : " " }, {"name" : " ", "id" : " ", "score" : " "}
 								@else
 									@if($match->resultat==NULL)
-									{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " " }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " "}
+									{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " ", "url": "{{ url('tournois/'.$data['tournois']->id.'/tour/'.$tour->id.'/match/'.$match->id) }}" }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : " "}
 									@else
 										@if($match->resultat->gagnant==$match->joueur_un->id)
-										{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_gagnant}}" }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_perdant}}"}
+										{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_gagnant}}", "url": "{{ url('tournois/'.$data['tournois']->id.'/tour/'.$tour->id.'/match/'.$match->id.'/resultat') }}" }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_perdant}}", "url": "{{ url('tournois/'.$data['tournois']->id.'/tour/'.$tour->id.'/match/'.$match->id.'/resultat') }}" }
 										@else
-										{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_perdant}}" }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_gagnant}}"}
+										{"name" : "{{$match->joueur_un['nom']}} {{$match->joueur_un['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_perdant}}", "url": "{{ url('tournois/'.$data['tournois']->id.'/tour/'.$tour->id.'/match/'.$match->id.'/resultat') }}" }, {"name" : "{{$match->joueur_deux['nom']}} {{$match->joueur_deux['prenom']}}", "id" : "{{$match->joueur_un['id']}}", "score" : "{{$match->resultat->score_gagnant}}", "url": "{{ url('tournois/'.$data['tournois']->id.'/tour/'.$tour->id.'/match/'.$match->id.'/resultat') }}" }
 										@endif
 									@endif
 								@endif
