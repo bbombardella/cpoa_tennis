@@ -32,10 +32,10 @@
                                 Numéro de tour: {{ $data['match']->numeroDeMatch }}
                             </li>
                             <li>
-                                Joueur 1: {{ $data['match']->joueur_un }}
+                                Joueur 1: <a class="underline" href="{{ url('joueurs/'.$data['match']->joueur_un->id) }}">{{ $data['match']->joueur_un->nom }} {{ $data['match']->joueur_un->prenom }}</a>
                             </li>
                             <li>
-                                Joueur 2 : {{ $data['match']-> joueur_deux }}
+                                Joueur 2 : <a class="underline" href="{{ url('joueurs/'.$data['match']->joueur_deux->id) }}">{{ $data['match']->joueur_deux->nom }} {{ $data['match']->joueur_deux->prenom }}</a>
                             </li>
                         </ul>
                     </div>

@@ -25,7 +25,7 @@ class MatchController extends Controller
 
     public function show($id_tournoi, $id_tour, $id_match) {
         $match = Match::find($id_match);
-        if($resultat = ResultatMatch::find($id_match)!=null){
+        if($resultats = ResultatMatch::find($id_match)!=null){
             return view('match/show')->with('data', [
                 'id_tournois'=>$id_tournoi,
                 'match'=>$match,
