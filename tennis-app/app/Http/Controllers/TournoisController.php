@@ -190,11 +190,20 @@ class TournoisController extends Controller
         $tournois = Tournois::find($id_tournois);
         $statut = Statut::find($tournois->idStatut);
         $statuts = Statut::all();
+        $tours = Tour::all();
+        if (count($tours->where('idTournois',$tournois->id))){
+            $generate=true;
+
+        }else{
+            $generate=false;
+        }
+
         if($tournois) {
             return view('tournois/modalChangeState')->with('data', [
                 'tournois' =>$tournois,
                 'statut' => $statut,
-                'statuts' => $statuts
+                'statuts' => $statuts,
+                'generate'=>$generate,
             ]);
         } else {
             abort(404, 'tournoi non trouvé !');
