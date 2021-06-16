@@ -21,13 +21,10 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <h3 class="font-semibold text-xl text-gray-800 leading-tight mb-2">
-                        Informations sur le match numéro {{ $data['match']->id }} du tour {{ $data['id_tour'] }}
+                        Informations sur le match {{ $data['match']->numeroDeMatch }} du tour {{ $data['match']->tour->numeroDuTour }}
                     </h3>
                     <div>
                         <ul>
-                            <li>
-                                Id: {{ $data['match']->id }}
-                            </li>
                             <li>
                                 Numéro de tour: {{ $data['match']->numeroDeMatch }}
                             </li>
@@ -60,7 +57,7 @@
                 </div>
                 <div class="m-4 float-right">
                     <x-button type="button" class="waves-effect waves-light btn modal-trigger">
-                        <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour') }}'>
+                        <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour'.$data['id_tour'].'/match') }}'>
                           Retour
                         </a>
                     </x-button>
