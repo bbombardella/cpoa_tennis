@@ -35,11 +35,11 @@
                 <div class="sm:flex sm:items-start">
                     <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                         <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-                            Ajouter des joueurs
+                            Modifier les joueurs participants
                         </h3>
                         <div class="mt-2">
                             <p class="text-sm text-gray-500">
-                                Veuillez sélectionner les participants du tour
+                                Veuillez choisir les joueurs participants à ce match
                             </p>
                         </div>
                     </div>
@@ -47,29 +47,39 @@
             </div>
             <div class="flex flex-1 flex-wrap flex-col justify-center items-center m-2 bg-white px-4 pb-4 sm:pb-4">
                 <form class="w-1/2 m-1" method="POST" id="ajout"
-                    action="{{ url('tournois/' . $data['id_tournois'] . '/tour/'.$data['id_tour'].'/match/create') }}">
-                    <x-label for="joueur_1" :value="__('Joueur à ajouter')" />
+                    action="{{ url('tournois/' . $data['id_tournois'] . '/tour/'.$data['id_tour'].'/match/'.$data['id_match'].'/manageplayer') }}">
+                    <x-label for="joueur_1" :value="__('Joueur à changer')" />
                     <select id="joueur_1" class="block mt-1 mr-3 w-full" type="string"
                         name="joueur_1" required autofocus>
                         @foreach ($data['joueurs'] as $joueur)
                             @CRSFs
                             <li>
                                 <p>
-                                    <option value="{{ $joueur->id }}">{{ $joueur->nom }}
-                                        {{ $joueur->prenom }}</option>
+                                    @if ($data['joueur1']!=null && $joueur->id==$data['joueur1']->id)
+                                        <option value="{{ $joueur->id }}" selected="selected">{{ $joueur->nom }}
+                                            {{ $joueur->prenom }}</option>
+                                    @else
+                                        <option value="{{ $joueur->id }}">{{ $joueur->nom }}
+                                            {{ $joueur->prenom }}</option>
+                                    @endif 
                                 </p>
                             </li>
                         @endforeach
                     </select>
-                    <x-label for="joueur_2" :value="__('Joueur à ajouter')" />
+                    <x-label for="joueur_2" :value="__('Joueur à changer')" />
                     <select id="joueur_2" class="block mt-1 mr-3 w-full" type="string"
                         name="joueur_2" required autofocus>
                         @foreach ($data['joueurs'] as $joueur)
                             @CRSFs
                             <li>
                                 <p>
-                                    <option value="{{ $joueur->id }}">{{ $joueur->nom }}
-                                        {{ $joueur->prenom }}</option>
+                                    @if ($data['joueur2']!=null && $joueur->id==$data['joueur2']->id)
+                                        <option value="{{ $joueur->id }}" selected="selected">{{ $joueur->nom }}
+                                            {{ $joueur->prenom }}</option>
+                                    @else
+                                        <option value="{{ $joueur->id }}">{{ $joueur->nom }}
+                                            {{ $joueur->prenom }}</option>
+                                    @endif                                    
                                 </p>
                             </li>
                         @endforeach

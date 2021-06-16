@@ -76,10 +76,32 @@ class MatchController extends Controller
         return redirect('/tournois/'.$id_tournoi.'/tour/'.$id_tour.'/match')->with('succesMsg', 'Match crée avec succès');
     }
 
+    public function managePlayer($id_tournoi, $id_tour, $id_match){
+        $match=Match::find($id_match);
+        $tournoi = Tournois::find($id_tournoi);
+        $tour = Tour::find($id_tour);
+        $matchs = Match::where('idTour', $id_tour)->get();
+        $joueur1=$match->joueur_un;
+        $joueur2=$match->joueur_deux;
+        return view('match/modalManagePlayer')->with('data',[
+            'id_tournoi'=>$id_tournoi,
+            'id_tour'=>$id_tour,
+            'id_match'=>$id_match,
+            'joueur1'=>$joueur1,
+            'joueur2'=>$joueur2,
+            'joueurs' => $tournoi->joueur,
+            'id_tournois' => $tournoi->id,
+            'tour' => $tour,
+            'matchs' => $matchs,
+        ]);
+    }
+
     public function storePlayer(Request $request, $id_tournoi, $id_tour, $id_match){
         $match = Match::find($id_match);
-        $match->joueur1 = $request->joueur_1;
-        $match->joueur2 = $request->joueur_2;
+        $joueur1 = Joueur::find($request->joueur_1);
+        $joueur2 = Joueur::find($request->joueur_2);
+        $match->joueur_un()->associate($joueur1);
+        $match->joueur_deux()->associate($joueur2);
         $match->save();
     }
     
