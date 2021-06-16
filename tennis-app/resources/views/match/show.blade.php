@@ -58,9 +58,10 @@
                         </ul>
                     </div>
                 </div>
+                @role('Organisateur')               
                 <div class="m-4 float-left">
                     <x-button type="button" class="waves-effect waves-light btn modal-trigger">
-                        <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['id_tour'].'/match') }}'>
+                        <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['id_tour'].'/match/'.$data['match']->id.'/manageplayer') }}'>
                           Gérer les joueurs du match
                         </a>
                     </x-button>
@@ -78,6 +79,7 @@
                         </x-button>
                     @endif
                 </div>
+                @endrole
                 <div class="m-4 float-right">
                     <x-button type="button" class="waves-effect waves-light btn modal-trigger">
                         <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour'.$data['id_tour'].'/match') }}'>

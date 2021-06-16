@@ -64,8 +64,9 @@ Route::post('/tournois/{id_tournois}/tour/{id_tour}/match/{id_match}/resultat', 
 Route::get('/tournois/{id_tournois}/tour/{id_tour}/match', [MatchController::class, 'index']);
 Route::get('/tournois/{id_tournois}/tour/{id_tour}/match/create', [MatchController::class, 'create']);
 Route::post('/tournois/{id_tournois}/tour/{id_tour}/match/create', [MatchController::class, 'store']);
+Route::get('/tournois/{id_tournois}/tour/{id_tour}/match/{id_match}/manageplayer', [MatchController::class, 'managePlayer']);
+Route::post('/tournois/{id_tournois}/tour/{id_tour}/match/{id_match}/manageplayer', [MatchController::class, 'storePlayer']);
 Route::get('/tournois/{id_tournois}/tour/{id_tour}/match/{id_match}', [MatchController::class, 'show']);
-
 Route::get('/recherche', function () {
     return view('recherche/recherche');
 })->middleware(['auth'])->name('recherche');
