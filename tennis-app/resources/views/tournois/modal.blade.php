@@ -49,14 +49,14 @@
 
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
                     <div>
-                        <x-label for="lieu" :value="__('lieu')" />
+                        <x-label for="lieu" :value="__('Lieu')" />
 
                         <x-input id="lieu" class="block mt-1 mr-3" type="test" name="lieu" :value="old('lieu')" required
                             autofocus />
                     </div>
 
                     <div>
-                        <x-label for="date" :value="__('date')" />
+                        <x-label for="date" :value="__('Date')" />
 
                         <x-input id="date" class="block mt-1 mr-3" type="date" name="date" :value="old('date')" required
                             autofocus />
@@ -65,7 +65,7 @@
 
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row">
                     <div>
-                        <x-label for="idStatut" :value="__('idStatut')" />
+                        <x-label for="idStatut" :value="__('Statut')" />
 
                         <div class="col-sm-9">
                             <select id="idStatut" class="block mt-1 mr-3" type="int" name="idStatut"
