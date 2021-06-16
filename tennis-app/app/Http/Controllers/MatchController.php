@@ -137,6 +137,7 @@ class MatchController extends Controller
                 'score_gagnant' => $request->score1,
                 'score_perdant' => $request->score2
             ]);
+
         } else {
             $resultat = ResultatMatch::create([
                 'idMatch' => $id_match,
@@ -146,10 +147,25 @@ class MatchController extends Controller
                 'score_perdant' => $request->score1
             ]);
         }
-        
         $resultat->save();
 
+        $tours = Tour::where('idTournois', $id_tournois)->get();
+
+        $this->nextMatch($match->numeroDeMatch, Joueur::find($resultat->gagnant), $tours[$match->tour->numeroDuTour]);        
+
         return redirect("tournois/$id_tournois/tour/$id_tour/match")->with('successMsg', 'Résultats saisies avec succès !');
+    }
+
+    public function nextMatch($numero_match, Joueur $gagnant, Tour $prochain_tour) {
+        $num_prochain_match = $numero_match/2; //0,5
+        $num_prochain_match_arrondi = (int)round($numero_match/2, 0, PHP_ROUND_HALF_UP); //1
+        $match = Match::where('idTour', $prochain_tour->id)->where('numeroDeMatch', $num_prochain_match_arrondi)->first();
+        if($num_prochain_match<$num_prochain_match_arrondi) {
+            $match->joueur_un()->associate($gagnant);
+        } else {
+            $match->joueur_deux()->associate($gagnant);
+        }
+        $match->save();
     }
 
     public function delete($id_tour, $id_match) {

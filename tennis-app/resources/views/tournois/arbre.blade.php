@@ -47,7 +47,7 @@
                     [
                         @foreach ($tour->matchs as $match)
                             [
-                                @if($match->joueur_un==NULL)
+                                @if($match->joueur_un==NULL || $match->joueur_deux==NULL)
 									{"name" : " ", "id" : " ", "score" : " " }, {"name" : " ", "id" : " ", "score" : " "}
 								@else
 									@if($match->resultat==NULL)
