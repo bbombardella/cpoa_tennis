@@ -31,15 +31,22 @@
                             <li>
                                 Numéro de tour: {{ $data['match']->numeroDeMatch }}
                             </li>
+                            @if(($data['match']->joueur_un)!=null)
                             <li>
-                                Joueur 1: {{ $data['match']->joueur_un }}
+                                Joueur 1: {{ $data['match']->joueur_un->prenom }} {{ $data['match']->joueur_un->nom }}
                             </li>
                             <li>
-                                Joueur 2 : {{ $data['match']-> joueur_deux }}
+                                Joueur 2: {{ $data['match']->joueur_deux->prenom }} {{ $data['match']->joueur_deux->nom }}
                             </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
+                <x-button type="button" class="waves-effect waves-light btn modal-trigger">
+                        <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['id_tour'].'/match') }}'>
+                          Gérer les joueurs du match
+                        </a>
+                    </x-button>
                 <div class="m-4 float-right">
                     <x-button type="button" class="waves-effect waves-light btn modal-trigger">
                         <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour') }}'>
