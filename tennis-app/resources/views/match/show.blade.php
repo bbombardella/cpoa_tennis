@@ -88,7 +88,7 @@
                 @endrole
                 <div class="m-4 float-right">
                     <x-button type="button" class="waves-effect waves-light btn modal-trigger">
-                        <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour'.$data['id_tour'].'/match') }}'>
+                        <a href='{{ url('/tournois/'.$data['id_tournois'].'/tour/'.$data['id_tour'].'/match') }}'>
                           Retour
                         </a>
                     </x-button>
