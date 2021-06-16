@@ -69,7 +69,6 @@ class MatchController extends Controller
             'idTour'=> $id_tour,
             'idStatut' => $id_statut,
         ]);
-        dump([$joueur1, $joueur2]);
         $match->joueur_un()->associate($joueur1);
         $match->joueur_deux()->associate($joueur2);
         $match->save();
